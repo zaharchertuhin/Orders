@@ -22,6 +22,8 @@ vector<Order> load_order() { //выгрузка заказов
             getline(in, data);
             order.status = data;
             getline(in, data);
+            order.price = atoi(data.c_str());
+            getline(in, data);
             order.delete_status = atoi(data.c_str());
             getline(in, data);
             order_list.push_back(order);
@@ -44,7 +46,7 @@ void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в фай
     in.open("data.dat");
     if (in.is_open()) {
         for (Order order : order_list) {
-            in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.delete_status << "\n*\n";
+            in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status<< "\n" << order.price << "\n" << order.delete_status  << "\n*\n";
         }
     }
     else cout << "error: fuck you ass" << endl;

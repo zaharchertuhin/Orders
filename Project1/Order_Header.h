@@ -11,6 +11,7 @@ struct Order {
     int id = NULL;
     std::string description;
     std::string status;
+    int price = 0;
     bool delete_status = 1;
 };
 

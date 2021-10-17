@@ -98,13 +98,13 @@ int main() {
                     }
                     case 7: {
                         system("cls");
-                        cout << "Количество заказов: " << sumOrders(orders, Username) << endl;
+                        cout << "Сумма стоимости заказов: " << sumOrders(orders, Username) << endl;
                         system("pause");
                         break;
                     }
 
                     case 8: {
-                        system("cls");s
+                        system("cls");
                         key = false;
                         
                         break;
