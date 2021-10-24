@@ -15,6 +15,8 @@ Order orderAdd(vector<Order>& order_list, string& Username) { // добавление зака
     cin >> order.description;
     cout << "¬ведите статус заказа: ";
     cin >> order.status;
+    cout << "¬ведите стоимость заказа: ";
+    cin >> order.price;
     saveOrder(order);
     return order;
 }
@@ -26,6 +28,8 @@ Order Edit_Order(Order& order, string& Username) { // изменение заказа
     cin >> order.description;
     cout << "¬ведите статус заказа: ";
     cin >> order.status;
+    cout << "¬ведите стоимость заказа: ";
+    cin >> order.price;
     system("pause");
     return order;
 }
@@ -45,6 +49,6 @@ void saveOrder(Order& order) { //сохранение заказа в файл при редактировании
     fstream in;
     in.open("data.dat", ios::app);
     if (in.is_open()) {
-        in << order.id<< "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.delete_status << "\n*\n";
+        in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.price << "\n" << order.delete_status << "\n*\n";
     }
 }
