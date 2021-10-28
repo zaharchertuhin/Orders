@@ -7,31 +7,52 @@ void saveOrder(Order& order);
 Order orderAdd(vector<Order>& order_list, string& Username) { // добавление заказа
     Order order;
     system("cls");
-
-    order.id = order_list.size() + 1;
+    string val;
+    order.id = static_cast<int>(order_list.size()) + 1;
     order.delete_status = false;
     order.Username = Username;
     cout << "Введите описание заказа: ";
-    cin >> order.description;
+    (cin >> order.description).get();
     cout << "Введите статус заказа: ";
-    cin >> order.status;
+    (cin >> order.status).get();
     cout << "Введите стоимость заказа: ";
-    cin >> order.price;
-    saveOrder(order);
-    return order;
+    cin >> val;
+	if (isdigit(val[0])) {
+		order.price = stoi(val); 
+        saveOrder(order);
+		return order;
+	}
+    else {
+        cout << "Заказ заполнен неправильно!" << endl;
+        system("pause");
+        Order ordrer;
+        return ordrer;
+    }
+
 }
 
 Order Edit_Order(Order& order, string& Username) { // изменение заказа
     system("cls");
+    string val;
     order.Username = Username;
     cout << "Введите описание заказа: ";
-    cin >> order.description;
+    (cin >> order.description).get();
     cout << "Введите статус заказа: ";
-    cin >> order.status;
+    (cin >> order.status).get();
     cout << "Введите стоимость заказа: ";
-    cin >> order.price;
-    system("pause");
-    return order;
+    cin >> val;
+    if (isdigit(val[0])) {
+        order.price = stoi(val);
+        saveOrder(order);
+        system("pause");
+        return order;
+    }
+    else {
+        cout << "Заказ заполнен неправильно!" << endl;
+        system("pause");
+        Order ordrer;
+        return ordrer;
+    }
 }
 
 Order delete_Order(Order& order) { //удаление заказа
@@ -42,7 +63,8 @@ Order delete_Order(Order& order) { //удаление заказа
 
 void saveOrders(vector<Order>& order_list, Order& order) { //сохранение заказа в вектор
     system("cls");
-    order_list[order.id - 1] = order;
+    uint32_t i = order.id - 1;
+    order_list[i] = order;
 }
 
 void saveOrder(Order& order) { //сохранение заказа в файл при редактировании
@@ -51,4 +73,5 @@ void saveOrder(Order& order) { //сохранение заказа в файл при редактировании
     if (in.is_open()) {
         in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.price << "\n" << order.delete_status << "\n*\n";
     }
+    in.close();
 }

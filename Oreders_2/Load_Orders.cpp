@@ -9,38 +9,33 @@ vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
 	in.open("data.dat");
 	if (in.is_open())
 	{
-		int n = 1;
-		//количество заказов в файле
 		while (!in.eof()) {
 			Order order;
 			string data;
+			bool flag = true;
 			getline(in, data);
 			if (orders.size() == 0) order.id = atoi(data.c_str());
 			else {
 				for (auto j : orders) {
-					order.id = orders.size() + n;
 					if (atoi(data.c_str()) == j.id) {
-						order.id = orders.size() + n + 1;
-						break;
+						flag = false;
 					}
-
 				}
-
 			}
-			getline(in, data);
-			order.Username = data;
-			getline(in, data);
-			order.description = data;
-			getline(in, data);
-			order.status = data;
-			getline(in, data);
-			order.price = atoi(data.c_str());
-			getline(in, data);
-			order.delete_status = atoi(data.c_str());
-			getline(in, data);
-			if (order.delete_status == false)order_list.push_back(order);
-			n++;
-
+			if (flag) {
+				getline(in, data);
+				order.Username = data;
+				getline(in, data);
+				order.description = data;
+				getline(in, data);
+				order.status = data;
+				getline(in, data);
+				order.price = atoi(data.c_str());
+				getline(in, data);
+				order.delete_status = atoi(data.c_str());
+				getline(in, data);
+				if (order.delete_status == false)order_list.push_back(order);
+			}
 		}
 		order_list.pop_back();
 		in.close();
@@ -60,4 +55,5 @@ void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в фай
 		}
 	}
 	else cout << "error: fuck you ass" << endl;
+	in.close();
 }

@@ -143,6 +143,7 @@
     <ClCompile Include="Edit_Order.cpp" />
     <ClCompile Include="Load_Orders.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Edit_Users.cpp" />
     <ClCompile Include="User_Check.cpp" />
   </ItemGroup>
   <ItemGroup>
