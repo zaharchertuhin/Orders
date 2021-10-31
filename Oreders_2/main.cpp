@@ -20,13 +20,23 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk);
 void Save_Users(vector<Users>& signIn);
 
 int UserCheck(string& Username, string& Password, vector<Users> Login);
+
 int sumOrders(vector<Order>& order_list, string& Username);
 int StartPage();
 
 vector<Users> Login();
+
+int StartPage();
+
 vector<Order> load_order(vector<Order>& orders);
 
 string Username, Password;
+
+Users SignUp();
+
+void Edit_Users(vector<Users>& signIn);
+
+void Save_Users(vector<Users>& signIn);
 
 Users SignUp();
 
@@ -38,7 +48,9 @@ int main() {
 	//setlocale(LC_ALL, "ru");
 	system("chcp 1251");
 	system("cls");
+
 	vector<Users> signIn = Login();
+
 
 	int p = 3;
 	while (p > 0) {
@@ -56,7 +68,7 @@ int main() {
 			break;
 		}
 		case 0: {
-			cout << "Îñòàëîñü ïîïûòîê: " << p << endl;
+			cout << "ÃŽÃ±Ã²Ã Ã«Ã®Ã±Ã¼ Ã¯Ã®Ã¯Ã»Ã²Ã®Ãª: " << p << endl;
 			cout << "Login:" << endl;
 			cin >> Username;
 			cout << "Password:" << endl;
@@ -70,16 +82,17 @@ int main() {
 				while (key) {
 					system("cls");
 
-					cout << "Çàêàçû:\n" <<
-						"\t1) Äîáàâèòü çàêàç.\n" <<
-						"\t2) Ïîêàçàòü çàêàçû.\n" <<
-						"\t3) Íàéòè çàêàç.\n" <<
-						"\t4) Ðåäàêòèðîâàòü çàêàç\n" <<
-						"\t5) Óäàëèòü çàêàç.\n" <<
-						"\t6) Âûãðóçèòü çàêàçû\n" <<
-						"\t7) Cóììà ñòîèìîñòè çàêàçîâ\n" <<
-						"\t8) Ðåäàêòðîâàòü ïîëüçîâàòåëåé\n" <<
-						"\t9) Ñîõðàíèòü è âûéòè\n";
+					cout << "Ã‡Ã ÃªÃ Ã§Ã»:\n" <<
+						"\t1) Ã„Ã®Ã¡Ã Ã¢Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§.\n" <<
+						"\t2) ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã§Ã ÃªÃ Ã§Ã».\n" <<
+						"\t3) ÃÃ Ã©Ã²Ã¨ Ã§Ã ÃªÃ Ã§.\n" <<
+						"\t4) ÃÃ¥Ã¤Ã ÃªÃ²Ã¨Ã°Ã®Ã¢Ã Ã²Ã¼ Ã§Ã ÃªÃ Ã§\n" <<
+						"\t5) Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§.\n" <<
+						"\t6) Ã‚Ã»Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§Ã»\n" <<
+						"\t7) CÃ³Ã¬Ã¬Ã  Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¨ Ã§Ã ÃªÃ Ã§Ã®Ã¢\n" <<
+						"\t8) ÃÃ¥Ã¤Ã ÃªÃ²Ã°Ã®Ã¢Ã Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¥Ã©\n" <<
+						"\t9) Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼ Ã¨ Ã¢Ã»Ã©Ã²Ã¨\n";
+
 					cin >> a;
 
 					switch (a) {
@@ -117,23 +130,26 @@ int main() {
 
 					case 6: {
 						vector<Order> n = load_order(orders);
+
 						orders = n;
 						break;
 					}
 
 					case 7: {
 						system("cls");
-						cout << "Ñóììà ñòîèìîñòè çàêàçîâ: " << sumOrders(orders, Username) << endl;
+						cout << "Ã‘Ã³Ã¬Ã¬Ã  Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¨ Ã§Ã ÃªÃ Ã§Ã®Ã¢: " << sumOrders(orders, Username) << endl;
 						system("pause");
 						break;
 					}
 					case 8: {
 						if (usr_chk >= 2) {
+
 							Edit_Users(signIn, usr_chk);
+
 							Save_Users(signIn);
 						}
 						else {
-							cout << "Ó âàñ íåò äîñòóïà" << endl;
+							cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
 							system("pause");
 						}
 						break;
@@ -146,12 +162,13 @@ int main() {
 						break;
 					}
 					default: {
-						cout << "Ìåñüå, âû äýáèë, äàâàéòå ïî-íîâîé." << endl;
+						cout << "ÃŒÃ¥Ã±Ã¼Ã¥, Ã¢Ã» Ã¤Ã½Ã¡Ã¨Ã«, Ã¤Ã Ã¢Ã Ã©Ã²Ã¥ Ã¯Ã®-Ã­Ã®Ã¢Ã®Ã©." << endl;
 						return 0;
 					}
 					};
 				}
 			}
+
 			else {
 				p--;
 			}
