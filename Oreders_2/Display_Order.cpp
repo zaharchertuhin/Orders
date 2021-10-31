@@ -7,7 +7,7 @@ void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех з
 
 	for (Order order : order_list) {
 		if (order.delete_status == 0 && order.Username == Username) {
-			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << "\n\n";
 		}
 	}
 	system("pause");
