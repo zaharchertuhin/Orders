@@ -12,9 +12,9 @@ Order orderAdd(vector<Order>& order_list, string& Username) { // добавление зака
     order.delete_status = false;
     order.Username = Username;
     cout << "¬ведите описание заказа: ";
-    cin >> order.description;
+    (cin >> order.description).get();
     cout << "¬ведите статус заказа: ";
-    cin >> order.status;
+    (cin >> order.status).get();
     cout << "¬ведите стоимость заказа: ";
     cin >> order.price;
     saveOrder(order);
@@ -25,9 +25,9 @@ Order Edit_Order(Order& order, string& Username) { // изменение заказа
     system("cls");
     order.Username = Username;
     cout << "¬ведите описание заказа: ";
-    cin >> order.description;
+    (cin >> order.description).get();
     cout << "¬ведите статус заказа: ";
-    cin >> order.status;
+    (cin >> order.status).get();
     cout << "¬ведите стоимость заказа: ";
     cin >> order.price;
     system("pause");

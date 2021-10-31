@@ -19,4 +19,5 @@ struct Order {
 struct Users {
     std::string login;
     std::string password;
+    int status = 1;
 };

@@ -22,13 +22,13 @@ Order delete_Order(Order& order);
 
 void saveOrders(vector<Order>& order_list, Order& order);
 
-bool UserCheck(string& Username, string& Password, vector<Users> Login);
+int UserCheck(string& Username, string& Password, vector<Users> Login);
 
 int sumOrders(vector<Order>& order_list, string& Username);
 
 vector<Users> Login();
 
-bool StartPage();
+int StartPage();
 
 vector<Order> load_order(vector<Order>& orders);
 
@@ -36,27 +36,45 @@ string Username;
 
 string Password;
 
+void Edit_Users(vector<Users>& signIn);
+
+void Save_Users(vector<Users>& signIn);
+
+Users SignUp();
+
 bool sort_orders(Order first, Order second) {
 	return (first.id < second.id);
 }
 
 int main() {
+	//setlocale(LC_ALL, "ru");
 	system("chcp 1251");
 	system("cls");
-	vector<Users> signIn = { {"admin", "password"},{"user", "1234"} };
+	vector<Users> signIn = Login();// { {"admin", "password"}, { "user", "1234" } };
 
 	int p = 3;
 	while (p > 0) {
-		bool strt_pg = StartPage();
-
-		cout << "Осталось попыток: " << p - 1 << endl;
-		if (strt_pg) {
+		int strt_pg = StartPage();
+		switch (strt_pg)
+		{
+		default:break;
+		
+		case 1: {
+			exit(0);
+		}
+		case 2: {
+			signIn.push_back(SignUp());
+			system("cls");
+			break;
+		}
+		case 0: {
+			cout << "Осталось попыток: " << p << endl;
 			cout << "Login:" << endl;
 			cin >> Username;
 			cout << "Password:" << endl;
 			cin >> Password;
-			bool usr_chk = UserCheck(Username, Password, signIn);
-			if (usr_chk) {
+			int usr_chk = UserCheck(Username, Password, signIn);
+			if (usr_chk != 0) {
 				p = 3;
 				int a;
 				vector<Order> orders;
@@ -71,9 +89,9 @@ int main() {
 						"\t4) Редактировать заказ\n" <<
 						"\t5) Удалить заказ.\n" <<
 						"\t6) Выгрузить заказы\n" <<
-						"\t7) Количество заказов\n" <<
-						"\t8) Сохранить и выйти\n";
-
+						"\t7) Cумма стоимости заказов\n";
+						cout << "\t8) Редактровать пользователей\n";
+						cout << "\t9) Сохранить и выйти\n";
 					cin >> a;
 
 					switch (a) {
@@ -110,7 +128,7 @@ int main() {
 
 					case 6: {
 						vector<Order> n = load_order(orders);
-						sort(n.begin(), n.end(), sort_orders);
+						//sort(n.begin(), n.end(), sort_orders);
 						orders = n;
 						break;
 					}
@@ -121,14 +139,24 @@ int main() {
 						system("pause");
 						break;
 					}
-
 					case 8: {
+						if (usr_chk >= 2) {
+							Edit_Users(signIn);
+							Save_Users(signIn);
+						}
+						else {
+							cout << "У вас нет доступа" << endl;
+							system("pause");
+						}
+						break;
+					}
+
+					case 9: {
 						system("cls");
 						saveOrder_list(orders);
 						key = false;
 						break;
 					}
-
 					default: {
 						cout << "Месье, вы дэбил, давайте по-новой." << endl;
 						return 0;
@@ -136,11 +164,11 @@ int main() {
 					};
 				}
 			}
+
 			else {
 				p--;
 			}
 		}
-		else if (!strt_pg) exit(0);
-
+		}
 	}
 }

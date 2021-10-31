@@ -2,31 +2,33 @@
 
 using namespace std;
 
-vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
+vector<Order> load_order(vector<Order>& orders) { //ГўГ»ГЈГ°ГіГ§ГЄГ  Г§Г ГЄГ Г§Г®Гў
 	vector<Order> order_list = orders;
 	system("cls");
 	fstream in;
 	in.open("data.dat");
 	if (in.is_open())
 	{
-		int n = 1;
-		//количество заказов в файле
 		while (!in.eof()) {
 			Order order;
 			string data;
-			bool key = true;
+
+			bool flag = true;
 			getline(in, data);
 			if (orders.size() == 0) order.id = atoi(data.c_str());
 			else {
 				for (auto j : orders) {
 					if (atoi(data.c_str()) == j.id) {
-						key = false;
-						break;
-					}
 
+						flag = false;
+						
+						break;
+
+					}
 				}
 
-			}if (key) {
+			}
+			if (flag) {
 				getline(in, data);
 				order.Username = data;
 				getline(in, data);
@@ -39,8 +41,8 @@ vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
 				order.delete_status = atoi(data.c_str());
 				getline(in, data);
 				if (order.delete_status == false)order_list.push_back(order);
-				n++;
 			}
+
 		}
 		order_list.pop_back();
 		in.close();
@@ -57,7 +59,7 @@ vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
 //	}
 //}
 
-void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в файл
+void saveOrder_list(vector<Order>& order_list) { //Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ ГўГ±ГҐГµ Г§Г ГЄГ Г§Г®Гў Гў ГґГ Г©Г«
 	fstream in;
 	in.open("data.dat");
 	if (in.is_open()) {
