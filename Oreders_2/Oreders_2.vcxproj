@@ -144,6 +144,7 @@
     <ClCompile Include="Load_Orders.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Edit_Users.cpp" />
+    <ClCompile Include="cript.cpp" />
     <ClCompile Include="User_Check.cpp" />
   </ItemGroup>
   <ItemGroup>

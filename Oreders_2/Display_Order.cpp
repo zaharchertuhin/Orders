@@ -7,7 +7,7 @@ void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех з
 
 	for (Order order : order_list) {
 		if (order.delete_status == 0 && order.Username == Username) {
-			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << "\n\n";
+			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 		}
 	}
 	system("pause");
@@ -17,23 +17,26 @@ void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех з
 
 Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
 	system("cls");
-	int id;
+	string id;
 	cout << "Enter a order id:" << endl;
 	cin >> id;
-	if (id <= order_list.size()) {
-		for (Order order : order_list) {
-			if (order.id == id) {
-				if (order.delete_status == 0 && order.Username == Username) {
-					return order;
-					break;
+	if (isdigit(id[0])) {
+		if (stoi(id) <= order_list.size()) {
+			for (Order order : order_list) {
+				if (order.id == stoi(id)) {
+					if (order.delete_status == 0 && order.Username == Username) {
+						return order;
+						break;
+					}
 				}
 			}
 		}
+
 	}
-	/*else {
-		Order ordrer;
-		return ordrer;
-	}*/
+	else cout << "Order not found" << endl;
+	system("pause");
+	Order ordrer;
+	return ordrer;
 }
 
 int sumOrders(vector<Order>& order_list, string& Username) {

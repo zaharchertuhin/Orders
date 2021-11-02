@@ -5,8 +5,6 @@
 #include <string>
 #include <fstream>
 
-
-
 struct Order {
     std::string Username;
     int id = 0;
@@ -21,3 +19,4 @@ struct Users {
     std::string password;
     int status = 1;
 };
+
