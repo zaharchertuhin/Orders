@@ -1,3 +1,4 @@
+
 #include "Order.h"
 #include <string>
 using namespace std;
@@ -9,9 +10,9 @@ Users SignUp() {
 	system("cls");
 	Users User;
 	fstream lgn("login.txt", ios::app);
-	cout << "Введите логин: ";
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ";
 	(cin >> User.login).get();
-	cout << "Введите пароль:";
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ:";
 	(cin >> User.password).get();
 	if (User.login == "admin") {
 		User.status = 3;
@@ -29,7 +30,7 @@ Users SignUp() {
 int StartPage() {
 	string a;
 	system("cls");
-	cout << "Введите число\nВойти: 1\nРегистрация: 2\nВыход: 3" << endl;
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\nпїЅпїЅпїЅпїЅпїЅ: 1\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 2\nпїЅпїЅпїЅпїЅпїЅ: 3" << endl;
 	cin >> a;
 	if (isdigit(a[0])) {
 		switch (stoi(a)) {
@@ -45,7 +46,7 @@ int StartPage() {
 			return 1;
 		}
 		default: {
-			cout << "Месье, вы дэбил, давайте по-новой." << endl;
+			cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
 			return 3;
 		}
 		}
@@ -85,4 +86,5 @@ vector<Users> Login() {
 		return User;
 	}
 	lgn.close();
+
 }

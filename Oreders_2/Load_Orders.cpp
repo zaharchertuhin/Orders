@@ -1,8 +1,9 @@
+
 #include "Order.h"
 
 using namespace std;
 
-vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
+vector<Order> load_order(vector<Order>& orders) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	vector<Order> order_list = orders;
 	system("cls");
 	fstream in;
@@ -46,7 +47,7 @@ vector<Order> load_order(vector<Order>& orders) { //выгрузка заказов
 
 
 
-void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в файл
+void saveOrder_list(vector<Order>& order_list) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
 	fstream in;
 	in.open("data.dat");
 	if (in.is_open()) {
@@ -56,4 +57,5 @@ void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в фай
 	}
 	else cout << "error: fuck you ass" << endl;
 	in.close();
+
 }

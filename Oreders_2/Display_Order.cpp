@@ -2,12 +2,12 @@
 
 using namespace std;
 
-void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех заказов
+void orderPrintAll(vector<Order>& order_list, string& Username) { //ГўГ»ГўГ®Г¤ ГўГ±ГҐГµ Г§Г ГЄГ Г§Г®Гў
 	system("cls");
 
 	for (Order order : order_list) {
 		if (order.delete_status == 0 && order.Username == Username) {
-			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+			cout << "id: " << order.id << "\nГЂГўГІГ®Г°: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 		}
 	}
 	system("pause");
@@ -15,7 +15,7 @@ void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех з
 
 
 
-Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
+Order FindOrder(vector<Order>& order_list, string& Username) { //ГЇГ®ГЁГ±ГЄ Г§Г ГЄГ Г§Г 
 	system("cls");
 	string id;
 	cout << "Enter a order id:" << endl;
@@ -33,8 +33,10 @@ Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
 		}
 
 	}
+
 	else cout << "Order not found" << endl;
 	system("pause");
+
 	Order ordrer;
 	return ordrer;
 }
@@ -49,10 +51,10 @@ int sumOrders(vector<Order>& order_list, string& Username) {
 	return sum;
 }
 
-void printOrder(Order& order) { //вывод определленного заказа
+void printOrder(Order& order) { //ГўГ»ГўГ®Г¤ Г®ГЇГ°ГҐГ¤ГҐГ«Г«ГҐГ­Г­Г®ГЈГ® Г§Г ГЄГ Г§Г 
 	system("cls");
 	if (order.delete_status == 0) {
-		cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+		cout << "id: " << order.id << "\nГЂГўГІГ®Г°: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 	}
 	else cout << "Order not found" << endl;
 	system("pause");

@@ -1,3 +1,4 @@
+
 #include "Order.h"
 #include <string.h>
 using namespace std;
@@ -10,23 +11,23 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 	while (key) {
 		int i = 1;
 		system("cls");
-		cout << "Все Пользователи: " << endl;
+		cout << "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << endl;
 		for (Users x : signIn) {
-			cout << i << ")\nЛогин: " << 
-				x.login << "\nПароль: " <<
+			cout << i << ")\nпїЅпїЅпїЅпїЅпїЅ: " << 
+				x.login << "\nпїЅпїЅпїЅпїЅпїЅпїЅ: " <<
 				Encode(x.password )<< //.replace(0, x.password.size(),"********") << 
-				"\nУровень допуска : " << x.status << "\n";
+				"\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ : " << x.status << "\n";
 			i++;
 		}
 		int a;
-		cout << "\n\nВведите действие: \n" << endl;
-		cout << "\t1) Изменить Логин" << 
-			"\n\t2) Изменить пароль" << 
-			"\n\t3) Изменить уровень" << 
-			"\n\t4) Удалить пользователя" <<
-			"\n\t5) Добавить пользователя: " <<
-			"\n\t6) Посмотреть пароли" << 
-			"\n\t7) Сохранить и Выйти" << endl;
+		cout << "\n\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: \n" << endl;
+		cout << "\t1) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ" << 
+			"\n\t2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << 
+			"\n\t3) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << 
+			"\n\t4) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" <<
+			"\n\t5) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " <<
+			"\n\t6) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << 
+			"\n\t7) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ" << endl;
 		cin >> a;
 		switch (a)
 		{
@@ -35,23 +36,23 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				string j;
-				cout << "Введите номер Логина" << endl;
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				cin >> j;
 				if (isdigit(j[0])) {
 					int z = stoi(j) - 1;
 					if (z <= (signIn.size())) {
-						cout << "Введите новый логин: ";
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ";
 						cin >> signIn[z].login;
 					}
 					else {
-						cout << "Такого пользователя нет!" << endl;
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
 						system("pause");
 					}
 				}
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -61,27 +62,27 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				string j;
-				cout << "Введите номер Логина" << endl;
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				cin >> j;
 				if (isdigit(j[0])) {
 					int z = stoi(j) - 1;
 					if (z <= (signIn.size())) {
-						cout << "Введите новый пароль: ";
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ";
 						cin >> signIn[z].password;
 					}
 					else {
-						cout << "Такого пользователя нет!" << endl;
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
 						system("pause");
 					}
 				}
 				else {
-					cout << "Месье, вы дэбил, давайте по-новой." << endl;
+					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -91,14 +92,14 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				string j;
-				cout << "Введите номер Логина" << endl;
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				cin >> j;
 				if (isdigit(j[0])) {
 					int z = stoi(j) - 1;
 					if (z <= (signIn.size())) {
 						while (true) {
 							int lvl = 0;
-							cout << "Введите новый уровень(Наименьшее значение: 1): ";
+							cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 1): ";
 							cin >> lvl;
 							if (lvl > 0) {
 								signIn[z].status = lvl;
@@ -111,18 +112,18 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 						}
 					}
 					else {
-						cout << "Такого пользователя нет!" << endl;
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
 						system("pause");
 					}
 				}
 				else {
-					cout << "Месье, вы дэбил, давайте по-новой." << endl;
+					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -132,7 +133,7 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				string j;
-				cout << "Введите номер Логина" << endl;
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				cin >> j;
 				if (isdigit(j[0])) {
 					int z = stoi(j) - 1;
@@ -140,18 +141,18 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 						signIn.erase(signIn.begin() + z - 1);
 					}
 					else {
-						cout << "Такого пользователя нет!" << endl;
+						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
 						system("pause");
 					}
 				}
 				else {
-					cout << "Месье, вы дэбил, давайте по-новой." << endl;
+					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -161,13 +162,13 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 				system("cls");
 				Users user;
 				string stat = "1";
-				cout << "Введите новый логин: ";
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ";
 				cin >> user.login;
-				cout << "Введите новый пароль: ";
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ";
 				cin >> user.password;
 
 				while (true) {
-					cout << "Введите новый уровень(Наименьшее значение: 1): ";
+					cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 1): ";
 					cin >> stat;
 					if (isdigit(stat[0])) {
 						if (stoi(stat) <= usr_chk) {
@@ -180,7 +181,7 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 						}
 					}
 					else {
-						cout << "Месье, вы дэбил, давайте по-новой." << endl;
+						cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
 						system("pause");
 						break;
 					}
@@ -190,7 +191,7 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -199,15 +200,15 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				int j;
-				cout << "Введите номер Логина" << endl;
+				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				cin >> j;
 				j--;
-				cout << "\n Логин: " << signIn[j].login << "\n Пароль: " << signIn[j].password << endl;
+				cout << "\n пїЅпїЅпїЅпїЅпїЅ: " << signIn[j].login << "\n пїЅпїЅпїЅпїЅпїЅпїЅ: " << signIn[j].password << endl;
 				system("pause");
 				break;
 			}
 			else {
-				cout << "У вас нет доступа" << endl;
+				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
 				system("pause");
 				break;
 			}
@@ -232,3 +233,4 @@ void Save_Users(vector<Users>& signIn) {
 	}
 	lgn.close();
 }
+

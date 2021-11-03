@@ -4,18 +4,18 @@ using namespace std;
 
 void saveOrder(Order& order);
 
-Order orderAdd(vector<Order>& order_list, string& Username) { // добавление заказа
+Order orderAdd(vector<Order>& order_list, string& Username) { // Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г§Г ГЄГ Г§Г 
     Order order;
     system("cls");
     string val;
     order.id = static_cast<int>(order_list.size()) + 1;
     order.delete_status = false;
     order.Username = Username;
-    cout << "Введите описание заказа: ";
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г®ГЇГЁГ±Г Г­ГЁГҐ Г§Г ГЄГ Г§Г : ";
     (cin >> order.description).get();
-    cout << "Введите статус заказа: ";
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ ГІГіГ± Г§Г ГЄГ Г§Г : ";
     (cin >> order.status).get();
-    cout << "Введите стоимость заказа: ";
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г ГЄГ Г§Г : ";
     cin >> val;
 	if (isdigit(val[0])) {
 		order.price = stoi(val); 
@@ -23,7 +23,7 @@ Order orderAdd(vector<Order>& order_list, string& Username) { // добавление зака
 		return order;
 	}
     else {
-        cout << "Заказ заполнен неправильно!" << endl;
+        cout << "Г‡Г ГЄГ Г§ Г§Г ГЇГ®Г«Г­ГҐГ­ Г­ГҐГЇГ°Г ГўГЁГ«ГјГ­Г®!" << endl;
         system("pause");
         Order ordrer;
         return ordrer;
@@ -31,19 +31,21 @@ Order orderAdd(vector<Order>& order_list, string& Username) { // добавление зака
 
 }
 
-Order Edit_Order(Order& order, string& Username) { // изменение заказа
+Order Edit_Order(Order& order, string& Username) { // ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГҐ Г§Г ГЄГ Г§Г 
     system("cls");
+
 	if (order.delete_status == 1) {
 		Order ordrer;
 		return ordrer;
 	}
 	string val;
 	order.Username = Username;
-    cout << "Введите описание заказа: ";
+
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г®ГЇГЁГ±Г Г­ГЁГҐ Г§Г ГЄГ Г§Г : ";
     (cin >> order.description).get();
-    cout << "Введите статус заказа: ";
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ ГІГіГ± Г§Г ГЄГ Г§Г : ";
     (cin >> order.status).get();
-    cout << "Введите стоимость заказа: ";
+    cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г ГЄГ Г§Г : ";
     cin >> val;
     if (isdigit(val[0])) {
         order.price = stoi(val);
@@ -52,23 +54,28 @@ Order Edit_Order(Order& order, string& Username) { // изменение заказа
         return order;
     }
     else {
-        
+
+        cout << "Г‡Г ГЄГ Г§ Г§Г ГЇГ®Г«Г­ГҐГ­ Г­ГҐГЇГ°Г ГўГЁГ«ГјГ­Г®!" << endl;
+        system("pause");
+        Order ordrer;
+        return ordrer;
+
     }
 }
 
-Order delete_Order(Order& order) { //удаление заказа
+Order delete_Order(Order& order) { //ГіГ¤Г Г«ГҐГ­ГЁГҐ Г§Г ГЄГ Г§Г 
     system("cls");
     order.delete_status = 1;
     return order;
 }
 
-void saveOrders(vector<Order>& order_list, Order& order) { //сохранение заказа в вектор
+void saveOrders(vector<Order>& order_list, Order& order) { //Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ Г§Г ГЄГ Г§Г  Гў ГўГҐГЄГІГ®Г°
     system("cls");
     uint32_t i = order.id - 1;
     order_list[i] = order;
 }
 
-void saveOrder(Order& order) { //сохранение заказа в файл при редактировании
+void saveOrder(Order& order) { //Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ Г§Г ГЄГ Г§Г  Гў ГґГ Г©Г« ГЇГ°ГЁ Г°ГҐГ¤Г ГЄГІГЁГ°Г®ГўГ Г­ГЁГЁ
     fstream in;
     in.open("data.dat");
     if (in.is_open()) {
