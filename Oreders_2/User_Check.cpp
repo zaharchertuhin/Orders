@@ -7,12 +7,18 @@ Users SignUp() {
 	Users User;
 	fstream lgn("login.txt", ios::app);
 	string lg, ps;
-	cout << "Ââåäèòå ëîãèí: ";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã«Ã®Ã£Ã¨Ã­: ";
 	(cin >> lg).get();
-	cout << "Ââåäèòå ïàðîëü:";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¯Ã Ã°Ã®Ã«Ã¼:";
 	(cin >> ps).get();
 	User.login = lg;
 	User.password = ps;
+
+	if (User.login == "admin") {
+		User.status = 3;
+	}
+	else User.status = 1;
+
 	if (lgn.is_open()) {
 		lgn <<"\n" << User.login << "\n" << User.password << "\n*";
 	}
@@ -25,22 +31,24 @@ Users SignUp() {
 int StartPage() {
 	int a;
 	system("cls");
-	cout << "Ââåäèòå ÷èñëî\nÂîéòè: 1\nÐåãèñòðàöèÿ: 2\nÂûõîä: 3" << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\nÃ‚Ã®Ã©Ã²Ã¨: 1\nÃÃ¥Ã£Ã¨Ã±Ã²Ã°Ã Ã¶Ã¨Ã¿: 2\nÃ‚Ã»ÃµÃ®Ã¤: 3" << endl;
 	cin >> a;
 	switch (a) {
 	case 1: {
 		system("cls");
 		return 0;
+
 	}
 	case 2:
 	{
 		return 2;
 	}
+
 	case 3: {
 		return 1;
 	}
 	default: {
-		cout << "Ìåñüå, âû äýáèë, äàâàéòå ïî-íîâîé." << endl;
+		cout << "ÃŒÃ¥Ã±Ã¼Ã¥, Ã¢Ã» Ã¤Ã½Ã¡Ã¨Ã«, Ã¤Ã Ã¢Ã Ã©Ã²Ã¥ Ã¯Ã®-Ã­Ã®Ã¢Ã®Ã©." << endl;
 		return 3;
 	}
 	}
@@ -79,4 +87,7 @@ vector<Users> Login() {
 		User.pop_back();
 		return User;
 	}
+
+	lgn.close();
+
 }

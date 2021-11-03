@@ -30,10 +30,8 @@ Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
 			}
 		}
 	}
-	/*else {
-		Order ordrer;
-		return ordrer;
-	}*/
+	Order ordrer;
+	return ordrer;
 }
 
 int sumOrders(vector<Order>& order_list, string& Username) {

@@ -21,7 +21,6 @@ vector<Order> load_order(vector<Order>& orders) { //âûãðóçêà çàêàç�
 					if (atoi(data.c_str()) == j.id) {
 
 						flag = false;
-						
 						break;
 
 					}
@@ -51,13 +50,7 @@ vector<Order> load_order(vector<Order>& orders) { //âûãðóçêà çàêàç�
 	}
 }
 
-//void Delet_BD() {
-//	fstream in;
-//	in.open("data.dat");
-//	if (in.is_open()) {
-//
-//	}
-//}
+
 
 void saveOrder_list(vector<Order>& order_list) { //ñîõðàíåíèå âñåõ çàêàçîâ â ôàéë
 	fstream in;
@@ -68,4 +61,7 @@ void saveOrder_list(vector<Order>& order_list) { //ñîõðàíåíèå âñåõ
 		}
 	}
 	else cout << "error: fuck you ass" << endl;
+
+	in.close();
+
 }

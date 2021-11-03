@@ -1,89 +1,182 @@
 #include "Order.h"
 using namespace std;
 
-void Edit_Users(vector<Users>& signIn) {
+
+void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 	bool key = true;
 	while (key) {
 		int i = 1;
 		system("cls");
-		cout << "Âñå Ïîëüçîâàòåëè: "<< endl;
+		cout << "Ã‚Ã±Ã¥ ÃÃ®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¨: " << endl;
 		for (Users x : signIn) {
 			string psw = "";
 			for (int i = 0; i < x.password.size(); i++) {
 				psw += "*";
 			}
-			cout << i << ")\nËîãèí: " << x.login << "\nÏàðîëü: " << psw << "\nÓðîâåíü äîïóñêà: " << x.status << "\n";
+			cout << i << ")\nÃ‹Ã®Ã£Ã¨Ã­: " << x.login << "\nÃÃ Ã°Ã®Ã«Ã¼: " << psw << "\nÃ“Ã°Ã®Ã¢Ã¥Ã­Ã¼ Ã¤Ã®Ã¯Ã³Ã±ÃªÃ : " << x.status << "\n";
 			i++;
 		}
 		int a;
-		cout << "\n\nÂâåäèòå äåéñòâèå: \n" << endl;
-		cout << "\t1) Èçìåíèòü Ëîãèí" << "\n\t2) Èçìåíèòü ïàðîëü" << "\n\t3) Èçìåíèòü óðîâåíü" << "\n\t4) Óäàëèòü ïîëüçîâàòåëÿ" << "\n\t5) Äîáàâèòü ïîëüçîâàòåëÿ: " << "\n\t6) Ïîñìîòðåòü ïàðîëè" << "\n\t7) Âûéòè" << endl;
+		cout << "\n\nÃ‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¤Ã¥Ã©Ã±Ã²Ã¢Ã¨Ã¥: \n" << endl;
+		cout << "\t1) ÃˆÃ§Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã‹Ã®Ã£Ã¨Ã­" << "\n\t2) ÃˆÃ§Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã¯Ã Ã°Ã®Ã«Ã¼" << "\n\t3) ÃˆÃ§Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼" << "\n\t4) Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿" << "\n\t5) Ã„Ã®Ã¡Ã Ã¢Ã¨Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿: " << "\n\t6) ÃÃ®Ã±Ã¬Ã®Ã²Ã°Ã¥Ã²Ã¼ Ã¯Ã Ã°Ã®Ã«Ã¨" << "\n\t7) Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼ Ã¨ Ã‚Ã»Ã©Ã²Ã¨" << endl;
 		cin >> a;
 		switch (a)
 		{
 		case 1:
 		{
-			system("cls");
-			int j;
-			cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-			cin >> j;
-			j--;
-			cout << "Ââåäèòå íîâûé ëîãèí: ";
-			cin >> signIn[j].login;
-			break;
+			if (usr_chk >= 3) {
+				system("cls");
+				int j;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã‹Ã®Ã£Ã¨Ã­Ã " << endl;
+				cin >> j;
+				j--;
+				if (j <= (signIn.size())) {
+					cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã«Ã®Ã£Ã¨Ã­: ";
+					cin >> signIn[j].login;
+				}
+				else {
+					cout << "Ã’Ã ÃªÃ®Ã£Ã® Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã­Ã¥Ã²!" << endl;
+					system("pause");
+				}
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
 		}
 		case 2:
 		{
-			system("cls");
-			int j;
-			cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-			cin >> j;
-			j--;
-			cout << "Ââåäèòå íîâûé ïàðîëü: ";
-			cin >> signIn[j].password;
-			break;
+			if (usr_chk >= 3) {
+				system("cls");
+				int j;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã‹Ã®Ã£Ã¨Ã­Ã " << endl;
+				cin >> j;
+				j--;
+				if (j <= (signIn.size())) {
+					cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã¯Ã Ã°Ã®Ã«Ã¼: ";
+					cin >> signIn[j].password;
+				}
+				else {
+					cout << "Ã’Ã ÃªÃ®Ã£Ã® Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã­Ã¥Ã²!" << endl;
+					system("pause");
+				}
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
 		}
 		case 3:
 		{
-			system("cls");
-			int j;
-			cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-			cin >> j;
-			j--;
-			cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
-			cin >> signIn[j].status;
-			break;
+			if (usr_chk >= 3) {
+				system("cls");
+				int j;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã‹Ã®Ã£Ã¨Ã­Ã " << endl;
+				cin >> j;
+				j--;
+				if (j <= (signIn.size())) {
+					while (true) {
+						int lvl = 0;
+						cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼(ÃÃ Ã¨Ã¬Ã¥Ã­Ã¼Ã¸Ã¥Ã¥ Ã§Ã­Ã Ã·Ã¥Ã­Ã¨Ã¥: 1): ";
+						cin >> lvl;
+						if (lvl > 0) {
+							signIn[j].status = lvl;
+							break;
+						}
+						else {
+							cout << "Wrong level!" << endl;
+							system("pause");
+						}
+					}
+				}
+				else {
+					cout << "Ã’Ã ÃªÃ®Ã£Ã® Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã­Ã¥Ã²!" << endl;
+					system("pause");
+				}
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
 		}
 		case 4:
 		{
-			system("cls");
-			int j;
-			cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-			cin >> j;
-			signIn.erase(signIn.begin() + j - 1);
-			break;
+			if (usr_chk >= 3) {
+				system("cls");
+				int j;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã‹Ã®Ã£Ã¨Ã­Ã " << endl;
+				cin >> j;
+				j--;
+				if (j <= (signIn.size())) {
+					signIn.erase(signIn.begin() + j - 1);
+				}
+				else {
+					cout << "Ã’Ã ÃªÃ®Ã£Ã® Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã­Ã¥Ã²!" << endl;
+					system("pause");
+				}
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
 		}
 		case 5: {
-			system("cls");
-			Users user;
-			cout << "Ââåäèòå íîâûé ëîãèí: ";
-			cin >> user.login;
-			cout << "Ââåäèòå íîâûé ïàðîëü: ";
-			cin >> user.password;
-			cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
-			cin >> user.status;
-			signIn.push_back(user);
-			break;
+			if (usr_chk >= 2) {
+				system("cls");
+				Users user;
+				int stat = 1;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã«Ã®Ã£Ã¨Ã­: ";
+				cin >> user.login;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã¯Ã Ã°Ã®Ã«Ã¼: ";
+				cin >> user.password;
+
+				while (true) {
+					cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼(ÃÃ Ã¨Ã¬Ã¥Ã­Ã¼Ã¸Ã¥Ã¥ Ã§Ã­Ã Ã·Ã¥Ã­Ã¨Ã¥: 1): ";
+					cin >> stat;
+					if (stat <= usr_chk) {
+						user.status = stat;
+						break;
+					}
+					else {
+						cout << "Wrong level!" << endl;
+						system("pause");
+					}
+				}
+
+				signIn.push_back(user);
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
 		}
 		case 6: {
-			system("cls");
-			int j;
-			cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-			cin >> j;
-			j--;
-			cout << "\n Ëîãèí: " << signIn[j].login << "\n Ïàðîëü: " << signIn[j].password << endl;
-			system("pause");
-			break;
+			if (usr_chk >= 3) {
+				system("cls");
+				int j;
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã‹Ã®Ã£Ã¨Ã­Ã " << endl;
+				cin >> j;
+				j--;
+				cout << "\n Ã‹Ã®Ã£Ã¨Ã­: " << signIn[j].login << "\n ÃÃ Ã°Ã®Ã«Ã¼: " << signIn[j].password << endl;
+				system("pause");
+				break;
+			}
+			else {
+				cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
+				system("pause");
+				break;
+			}
+
 		}
 		default:
 			key = false;
