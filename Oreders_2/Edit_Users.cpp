@@ -1,211 +1,82 @@
 #include "Order.h"
+#include <string.h>
 using namespace std;
 
+string base64_encode(std::string const& s, bool url);
+int isInt();
 
-void Edit_Users(vector<Users>& signIn, int& usr_chk) {
-	bool key = true;
-	while (key) {
-		int i = 1;
-		system("cls");
-		cout << "Âñå Ïîëüçîâàòåëè: " << endl;
-		for (Users x : signIn) {
-			string psw = "";
-			for (int i = 0; i < x.password.size(); i++) {
-				psw += "*";
-			}
-			cout << i << ")\nËîãèí: " << x.login << "\nÏàðîëü: " << psw << "\nÓðîâåíü äîïóñêà: " << x.status << "\n";
-			i++;
-		}
-		int a;
-		cout << "\n\nÂâåäèòå äåéñòâèå: \n" << endl;
-		cout << "\t1) Èçìåíèòü Ëîãèí" << "\n\t2) Èçìåíèòü ïàðîëü" << "\n\t3) Èçìåíèòü óðîâåíü" << "\n\t4) Óäàëèòü ïîëüçîâàòåëÿ" << "\n\t5) Äîáàâèòü ïîëüçîâàòåëÿ: " << "\n\t6) Ïîñìîòðåòü ïàðîëè" << "\n\t7) Ñîõðàíèòü è Âûéòè" << endl;
-		cin >> a;
-		switch (a)
-		{
-		case 1:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-				cin >> j;
-				j--;
-				if (j <= (signIn.size())) {
-					cout << "Ââåäèòå íîâûé ëîãèí: ";
-					cin >> signIn[j].login;
-				}
-				else {
-					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 2:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-				cin >> j;
-				j--;
-				if (j <= (signIn.size())) {
-					cout << "Ââåäèòå íîâûé ïàðîëü: ";
-					cin >> signIn[j].password;
-				}
-				else {
-					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 3:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-				cin >> j;
-				j--;
-				if (j <= (signIn.size())) {
-					while (true) {
-						int lvl = 0;
-						cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
-						cin >> lvl;
-						if (lvl > 0) {
-							signIn[j].status = lvl;
-							break;
-						}
-						else {
-							cout << "Wrong level!" << endl;
-							system("pause");
-						}
-					}
-				}
-				else {
-					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 4:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-				cin >> j;
-				j--;
-				if (j <= (signIn.size())) {
-					signIn.erase(signIn.begin() + j - 1);
-				}
-				else {
-					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 5: {
-			if (usr_chk >= 2) {
-				system("cls");
-				Users user;
-				int stat = 1;
-				cout << "Ââåäèòå íîâûé ëîãèí: ";
-				cin >> user.login;
-				cout << "Ââåäèòå íîâûé ïàðîëü: ";
-				cin >> user.password;
+//����� ����������, ���� ��� ���� ���� �� ������, � ���������� �����, � ����� ��� ��� ��������� �������� ���������
 
-				while (true) {
-					cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
-					cin >> stat;
-					if (stat <= usr_chk) {
-						user.status = stat;
-						break;
-					}
-					else {
-						cout << "Wrong level!" << endl;
-						system("pause");
-					}
-				}
+int FindUser(vector<Users>& Registered) {
+	system("cls");
+	string j;
+	cout << "������� ����� ������������, �������� ������� ��������." << endl;
+	cin >> j;
+	for (int i = 0; i < Registered.size(); i++) {
+		if (Registered[i].login == j) return i;
 
-				signIn.push_back(user);
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 6: {
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
-				cin >> j;
-				j--;
-				cout << "\n Ëîãèí: " << signIn[j].login << "\n Ïàðîëü: " << signIn[j].password << endl;
-				system("pause");
-				break;
-			}
-			else {
-				cout << "Ó âàñ íåò äîñòóïà" << endl;
-				system("pause");
-				break;
-			}
+	}
+	
+}
 
-		}
-		default:
-			key = false;
+
+string EditLogin() {
+	system("cls");
+	string login;
+	cout << "������� ����� �����: ";
+	cin >> login;
+	return login;
+}
+
+string EditPswrd() {
+	system("cls");
+	while (true)
+	{
+		string psw1, psw2;
+		cout << "������� ����� ������: ";
+		cin >> psw1;
+		cout << "\n\n��������� ����� ������: ";
+		cin >> psw2;
+		if (psw1 == psw2) { return psw1; break; }
+		else { cout << "\n\n������ �� ���������. ��������� ��� ���:" << endl; system("pause"); }
+	}
+}
+
+int EditLvl() {
+	system("cls");
+	while (true) {
+		int lvl = 0;
+		cout << "������� ����� ������� �� 1 �� 3: ";
+		cin >> lvl;
+		if (lvl > 0 && lvl < 4) {
+			return lvl;
 			break;
+		}
+		else {
+			cout << "Wrong level!" << endl;
+			system("pause");
 		}
 	}
 }
 
-void Save_Users(vector<Users>& signIn) {
+Users NewUser() {
+	system("cls");
+	Users user;
+	user.login = EditLogin();
+	user.password = EditPswrd();
+	user.status = EditLvl();
+	return user;
+}
+
+void Save_Users(vector<Users>& Registered) {
 	fstream lgn("login.txt");
 	if (lgn.is_open()) {
-		for (Users x : signIn) {
+		for (Users x : Registered) {
 			if (x.status != 0) {
-				lgn << x.login << "\n" << x.password << "\n" << x.status << "\n*\n";
+				lgn << x.login << "\n" << base64_encode(x.password, true) << "\n" << x.status << "\n*\n";
 			}
 
 		}
 	}
 	lgn.close();
 }
-
-//Users Find_User(vector<Users>& signIn, int& num) {
-//	Users user;
-//	int i = 1;
-//	for (Users x : signIn) {
-//		if (num = i) {
-//			user = x;
-//			return user;
-//		}
-//		i++;
-//	}
-//}

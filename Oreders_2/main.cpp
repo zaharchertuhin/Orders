@@ -1,178 +1,150 @@
 #include "Order.h"
-#include <ctime>
-#include <cstdlib>
-#include <algorithm>
-
 
 using namespace std;
 
-
 Order orderAdd(vector<Order>& vect, string& Username);
 Order FindOrder(vector<Order>& order_list, string& Username);
-Order Edit_Order(Order& order, string& Username);
+Order Edit_Order(Order& order, string& Username, bool showOrd);
 Order delete_Order(Order& order);
+Order pshBckOrdr(vector<Order>& order_list);
 
 void saveOrder_list(vector<Order>& order_list);
 void orderPrintAll(vector<Order>& order_list, string& Username);
 void printOrder(Order& order);
-void saveOrders(vector<Order>& order_list, Order& order);
-void Edit_Users(vector<Users>& signIn, int& usr_chk);
+void saveToVector(vector<Order>& order_list, Order& order);
+void Edit_Users(vector<Users>& signIn);
 void Save_Users(vector<Users>& signIn);
 
-int UserCheck(string& Username, string& Password, vector<Users> Login);
-
+bool UserCheck(string& Username, string& Password, vector<Users>& Login);
 int sumOrders(vector<Order>& order_list, string& Username);
-int StartPage();
+bool StartPage(vector<Users>& signIn);
+int isInt();
+int clearanceLevel(string& Username, vector<Users>& Login);
 
-vector<Users> Login();
-
-int StartPage();
-
-vector<Order> load_order(vector<Order>& orders);
+vector<Users> Logins();
+vector<Order> load_order();
 
 string Username, Password;
 
-Users SignUp();
+Users Registration(vector<Users>& Login);
 
-void Edit_Users(vector<Users>& signIn);
-
-void Save_Users(vector<Users>& signIn);
-
-Users SignUp();
-
-bool sort_orders(Order first, Order second) {
-	return (first.id < second.id);
-}
+string base64_encode(std::string const& s, bool url);
 
 int main() {
+	
 	//setlocale(LC_ALL, "ru");
 	system("chcp 1251");
 	system("cls");
-
-	vector<Users> signIn = Login();
-
-
+	vector<Users> signIn = Logins();
 	int p = 3;
 	while (p > 0) {
-		int strt_pg = StartPage();
-		switch (strt_pg)
-		{
-		default:break;
-
-		case 1: {
-			exit(0);
-		}
-		case 2: {
-			signIn.push_back(SignUp());
-			system("cls");
-			break;
-		}
-		case 0: {
-			cout << "ÃŽÃ±Ã²Ã Ã«Ã®Ã±Ã¼ Ã¯Ã®Ã¯Ã»Ã²Ã®Ãª: " << p << endl;
-			cout << "Login:" << endl;
-			cin >> Username;
-			cout << "Password:" << endl;
-			cin >> Password;
-			int usr_chk = UserCheck(Username, Password, signIn);
-			if (usr_chk != 0) {
-				p = 3;
-				int a;
-				vector<Order> orders;
-				bool key = true;
-				while (key) {
-					system("cls");
-
-					cout << "Ã‡Ã ÃªÃ Ã§Ã»:\n" <<
-						"\t1) Ã„Ã®Ã¡Ã Ã¢Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§.\n" <<
-						"\t2) ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã§Ã ÃªÃ Ã§Ã».\n" <<
-						"\t3) ÃÃ Ã©Ã²Ã¨ Ã§Ã ÃªÃ Ã§.\n" <<
-						"\t4) ÃÃ¥Ã¤Ã ÃªÃ²Ã¨Ã°Ã®Ã¢Ã Ã²Ã¼ Ã§Ã ÃªÃ Ã§\n" <<
-						"\t5) Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§.\n" <<
-						"\t6) Ã‚Ã»Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã§Ã ÃªÃ Ã§Ã»\n" <<
-						"\t7) CÃ³Ã¬Ã¬Ã  Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¨ Ã§Ã ÃªÃ Ã§Ã®Ã¢\n" <<
-						"\t8) ÃÃ¥Ã¤Ã ÃªÃ²Ã°Ã®Ã¢Ã Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¥Ã©\n" <<
-						"\t9) Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼ Ã¨ Ã¢Ã»Ã©Ã²Ã¨\n";
-
-					cin >> a;
-
-					switch (a) {
-					case 1: {
+		if (StartPage(signIn)) {
+			p = 3;
+			vector<Order> orders;
+			bool key = true;
+			while (key) {
+				system("cls");
+				cout << "Çàêàçû:\n" <<
+					"\t1) Äîáàâèòü çàêàç.\n" <<
+					"\t2) Ïîêàçàòü çàêàçû.\n" <<
+					"\t3) Íàéòè çàêàç.\n" <<
+					"\t4) Ðåäàêòèðîâàòü çàêàç\n" <<
+					"\t5) Óäàëèòü çàêàç.\n" <<
+					"\t6) Âûãðóçèòü çàêàçû\n" <<
+					"\t7) Cóììà ñòîèìîñòè çàêàçîâ\n" <<
+					"\t8) Ðåäàêòðîâàòü ïîëüçîâàòåëåé\n" <<
+					"\t9) Ñîõðàíèòü è âûéòè\n";
+				int a = isInt();
+				switch (a) {
+				case 1: {
+					try
+					{
 						Order ord = orderAdd(orders, Username);
-						if (ord.id != 0)orders.push_back(ord);
-						saveOrder_list(orders);
-						break;
+						orders.push_back(ord);
 					}
-					case 2: {
-						orderPrintAll(orders, Username);
-						break;
+					catch (const std::exception&)
+					{
+						cout << "Çàêàç çàïîëíåí íåïðàâèëüíî!" << endl;
+						system("pause");
 					}
-					case 3: {
+					saveOrder_list(orders);
+					break;
+				}
+				case 2: {
+					orderPrintAll(orders, Username);
+					break;
+				}
+				case 3: {
+					try
+					{
 						Order order = FindOrder(orders, Username);
 						printOrder(order);
-						break;
 					}
-
-					case 4: {
-						Order order = FindOrder(orders, Username);
-						order = Edit_Order(order, Username);
-						if (order.id != 0)saveOrders(orders, order);
-						saveOrder_list(orders);
-						break;
-					}
-
-					case 5: {
-						Order order = FindOrder(orders, Username);
-						order = delete_Order(order);
-						if (order.id != 0)saveOrders(orders, order);
-						saveOrder_list(orders);
-						break;
-					}
-
-					case 6: {
-						vector<Order> n = load_order(orders);
-
-						orders = n;
-						break;
-					}
-
-					case 7: {
-						system("cls");
-						cout << "Ã‘Ã³Ã¬Ã¬Ã  Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¨ Ã§Ã ÃªÃ Ã§Ã®Ã¢: " << sumOrders(orders, Username) << endl;
+					catch (const std::exception&)
+					{
+						cout << "Òàêîãî çàêàçà íåò." << endl;
 						system("pause");
-						break;
 					}
-					case 8: {
-						if (usr_chk >= 2) {
-
-							Edit_Users(signIn, usr_chk);
-
-							Save_Users(signIn);
-						}
-						else {
-							cout << "Ã“ Ã¢Ã Ã± Ã­Ã¥Ã² Ã¤Ã®Ã±Ã²Ã³Ã¯Ã " << endl;
-							system("pause");
-						}
-						break;
+					break;
+				}
+				case 4: {
+					Order order = FindOrder(orders, Username);
+					try
+					{
+						order = Edit_Order(order, Username, true);
+						saveToVector(orders, order);
 					}
-
-					case 9: {
-						system("cls");
-						saveOrder_list(orders);
-						key = false;
-						break;
+					catch (const std::exception& ex)
+					{
+						cout << "\n" << ex.what() << endl;
+						system("pause");
 					}
-					default: {
-						cout << "ÃŒÃ¥Ã±Ã¼Ã¥, Ã¢Ã» Ã¤Ã½Ã¡Ã¨Ã«, Ã¤Ã Ã¢Ã Ã©Ã²Ã¥ Ã¯Ã®-Ã­Ã®Ã¢Ã®Ã©." << endl;
-						return 0;
+					saveOrder_list(orders);
+					break;
+				}
+				case 5: {
+					Order order = FindOrder(orders, Username);
+					order = delete_Order(order);
+					if (order.id != 0)saveToVector(orders, order);
+					saveOrder_list(orders);
+					break;
+				}
+				case 6: {
+					vector<Order> n = load_order();
+					n.push_back(pshBckOrdr(orders));
+					break;
+				}
+				case 7: {
+					system("cls");
+					cout << "Ñóììà ñòîèìîñòè çàêàçîâ: " << sumOrders(orders, Username) << endl;
+					system("pause");
+					break;
+				}
+				case 8: {
+					int level = clearanceLevel(Username, signIn);
+					cout << level << endl;
+					if (level >= 2) {
+						Edit_Users(signIn);
+						Save_Users(signIn);
 					}
-					};
+					else { cout << "Âû çäåñü íè÷òîæåñòâî" << endl; system("pause"); }
+					break;
+				}
+				case 9: {
+					system("cls");
+					saveOrder_list(orders);
+					key = false;
+					break;
+				}
+				default: {
+					cout << "Ìåñüå, âû äýáèë, äàâàéòå ïî-íîâîé." << endl;
+					return 0;
+				}
 				}
 			}
-
-			else {
-				p--;
-			}
 		}
+		else {
+			p--;
 		}
 	}
 }

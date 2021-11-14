@@ -139,14 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base64.cpp" />
     <ClCompile Include="Display_Order.cpp" />
     <ClCompile Include="Edit_Order.cpp" />
     <ClCompile Include="Load_Orders.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Edit_Users.cpp" />
-    <ClCompile Include="User_Check.cpp" />
+    <ClCompile Include="Other.cpp" />
+    <ClCompile Include="Start_Page.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base64.h" />
     <ClInclude Include="Order.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

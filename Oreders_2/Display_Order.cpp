@@ -2,37 +2,33 @@
 
 using namespace std;
 
+int isInt();
+
 void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех заказов
 	system("cls");
 
 	for (Order order : order_list) {
 		if (order.delete_status == 0 && order.Username == Username) {
-			cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << "\n\n";
+			cout << "id: " << order.id << "\nДобавил(а): " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 		}
 	}
 	system("pause");
 }
 
-
-
 Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
 	system("cls");
-	int id;
 	cout << "Enter a order id:" << endl;
-	cin >> id;
-	if (id <= order_list.size()) {
-		for (Order order : order_list) {
-			if (order.id == id) {
-				if (order.delete_status == 0 && order.Username == Username) {
+	int id = isInt();
+		if (id <= order_list.size()) {
+			for (Order order : order_list) {
+				if (order.id == id && order.delete_status == 0 && order.Username == Username) {
 					return order;
 					break;
 				}
 			}
 		}
+		else throw exception();
 	}
-	Order ordrer;
-	return ordrer;
-}
 
 int sumOrders(vector<Order>& order_list, string& Username) {
 	int sum = 0;
@@ -47,8 +43,7 @@ int sumOrders(vector<Order>& order_list, string& Username) {
 void printOrder(Order& order) { //вывод определленного заказа
 	system("cls");
 	if (order.delete_status == 0) {
-		cout << "id: " << order.id << "\nАвтор: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+		cout << "id: " << order.id << "\nДобавил(а): " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 	}
-	else cout << "Order not found" << endl;
-	system("pause");
+	else throw exception();
 }
