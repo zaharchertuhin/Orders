@@ -1,10 +1,11 @@
-
 #include "Order.h"
 
 using namespace std;
 
-vector<Order> load_order(vector<Order>& orders) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	vector<Order> order_list = orders;
+int isInt();
+
+vector<Order> load_order() { //выгрузка заказов
+	vector<Order> order_list;
 	system("cls");
 	fstream in;
 	in.open("data.dat");
@@ -15,14 +16,6 @@ vector<Order> load_order(vector<Order>& orders) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ
 			string data;
 			bool flag = true;
 			getline(in, data);
-			if (orders.size() == 0) order.id = atoi(data.c_str());
-			else {
-				for (auto j : orders) {
-					if (atoi(data.c_str()) == j.id) {
-						flag = false;
-					}
-				}
-			}
 			if (flag) {
 				getline(in, data);
 				order.Username = data;
@@ -41,13 +34,18 @@ vector<Order> load_order(vector<Order>& orders) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ
 		order_list.pop_back();
 		in.close();
 		system("pause");
-		return order_list;
+	}
+	return order_list;
+}
+
+Order pshBckOrdr(vector<Order>& order_list) {
+	for (Order u : order_list) {
+		u.id = static_cast<int>(order_list.size()) + 1;
+		return u;
 	}
 }
 
-
-
-void saveOrder_list(vector<Order>& order_list) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
+void saveOrder_list(vector<Order>& order_list) { //сохранение всех заказов в файл
 	fstream in;
 	in.open("data.dat");
 	if (in.is_open()) {
@@ -55,7 +53,21 @@ void saveOrder_list(vector<Order>& order_list) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпї
 			in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.price << "\n" << order.delete_status << "\n*\n";
 		}
 	}
-	else cout << "error: fuck you ass" << endl;
+	else cout << "error: гребанный рот этого казино, блин" << endl;
 	in.close();
+}
 
+void saveToFile(Order& order) { //сохранение заказа в файл при редактировании
+	fstream in;
+	in.open("data.dat");
+	if (in.is_open()) {
+		in << order.id << "\n" << order.Username << "\n" << order.description << "\n" << order.status << "\n" << order.price << "\n" << order.delete_status << "\n*\n";
+	}
+	in.close();
+}
+
+void saveToVector(vector<Order>& order_list, Order& order) { //сохранение заказа в вектор
+	system("cls");
+	uint32_t i = order.id - 1;
+	order_list[i] = order;
 }

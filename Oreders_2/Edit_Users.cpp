@@ -1,236 +1,82 @@
-
 #include "Order.h"
 #include <string.h>
 using namespace std;
 
-string Encode(string& Text);
-string Decode(string& Text);
+string base64_encode(std::string const& s, bool url);
+int isInt();
 
-void Edit_Users(vector<Users>& signIn, int& usr_chk) {
-	bool key = true;
-	while (key) {
-		int i = 1;
-		system("cls");
-		cout << "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << endl;
-		for (Users x : signIn) {
-			cout << i << ")\nпїЅпїЅпїЅпїЅпїЅ: " << 
-				x.login << "\nпїЅпїЅпїЅпїЅпїЅпїЅ: " <<
-				Encode(x.password )<< //.replace(0, x.password.size(),"********") << 
-				"\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ : " << x.status << "\n";
-			i++;
-		}
-		int a;
-		cout << "\n\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: \n" << endl;
-		cout << "\t1) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ" << 
-			"\n\t2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << 
-			"\n\t3) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << 
-			"\n\t4) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" <<
-			"\n\t5) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " <<
-			"\n\t6) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << 
-			"\n\t7) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ" << endl;
-		cin >> a;
-		switch (a)
-		{
-		case 1:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				string j;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ";
-						cin >> signIn[z].login;
-					}
-					else {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
-						system("pause");
-					}
-				}
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 2:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				string j;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ";
-						cin >> signIn[z].password;
-					}
-					else {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
-						system("pause");
-					}
-				}
-				else {
-					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 3:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				string j;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						while (true) {
-							int lvl = 0;
-							cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 1): ";
-							cin >> lvl;
-							if (lvl > 0) {
-								signIn[z].status = lvl;
-								break;
-							}
-							else {
-								cout << "Wrong level!" << endl;
-								system("pause");
-							}
-						}
-					}
-					else {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
-						system("pause");
-					}
-				}
-				else {
-					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 4:
-		{
-			if (usr_chk >= 3) {
-				system("cls");
-				string j;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						signIn.erase(signIn.begin() + z - 1);
-					}
-					else {
-						cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!" << endl;
-						system("pause");
-					}
-				}
-				else {
-					cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
-					system("pause");
-				}
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 5: {
-			if (usr_chk >= 2) {
-				system("cls");
-				Users user;
-				string stat = "1";
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ";
-				cin >> user.login;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ";
-				cin >> user.password;
+//может переделать, шобы эта дичь была не войдом, а возвращала Юзера, а потом его уже отдельной функцией сохранять
 
-				while (true) {
-					cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 1): ";
-					cin >> stat;
-					if (isdigit(stat[0])) {
-						if (stoi(stat) <= usr_chk) {
-							user.status = stoi(stat);
-							break;
-						}
-						else {
-							cout << "Wrong level!" << endl;
-							system("pause");
-						}
-					}
-					else {
-						cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
-						system("pause");
-						break;
-					}
+int FindUser(vector<Users>& Registered) {
+	system("cls");
+	string j;
+	cout << "Введите Логин пользователя, которого желаете изменить." << endl;
+	cin >> j;
+	for (int i = 0; i < Registered.size(); i++) {
+		if (Registered[i].login == j) return i;
 
-				}
-				signIn.push_back(user);
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		case 6: {
-			if (usr_chk >= 3) {
-				system("cls");
-				int j;
-				cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				cin >> j;
-				j--;
-				cout << "\n пїЅпїЅпїЅпїЅпїЅ: " << signIn[j].login << "\n пїЅпїЅпїЅпїЅпїЅпїЅ: " << signIn[j].password << endl;
-				system("pause");
-				break;
-			}
-			else {
-				cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-				system("pause");
-				break;
-			}
-		}
-		
-		default:
-			key = false;
+	}
+	
+}
+
+
+string EditLogin() {
+	system("cls");
+	string login;
+	cout << "Введите новый логин: ";
+	cin >> login;
+	return login;
+}
+
+string EditPswrd() {
+	system("cls");
+	while (true)
+	{
+		string psw1, psw2;
+		cout << "Введите новый пароль: ";
+		cin >> psw1;
+		cout << "\n\nПовторите новый пароль: ";
+		cin >> psw2;
+		if (psw1 == psw2) { return psw1; break; }
+		else { cout << "\n\nПароли не совпадают. Повторите еще раз:" << endl; system("pause"); }
+	}
+}
+
+int EditLvl() {
+	system("cls");
+	while (true) {
+		int lvl = 0;
+		cout << "Введите новый уровень от 1 до 3: ";
+		cin >> lvl;
+		if (lvl > 0 && lvl < 4) {
+			return lvl;
 			break;
+		}
+		else {
+			cout << "Wrong level!" << endl;
+			system("pause");
 		}
 	}
 }
 
-void Save_Users(vector<Users>& signIn) {
+Users NewUser() {
+	system("cls");
+	Users user;
+	user.login = EditLogin();
+	user.password = EditPswrd();
+	user.status = EditLvl();
+	return user;
+}
+
+void Save_Users(vector<Users>& Registered) {
 	fstream lgn("login.txt");
 	if (lgn.is_open()) {
-		for (Users x : signIn) {
+		for (Users x : Registered) {
 			if (x.status != 0) {
-				lgn << x.login << "\n" << Encode(x.password) << "\n" << x.status << "\n*\n";
+				lgn << x.login << "\n" << base64_encode(x.password, true) << "\n" << x.status << "\n*\n";
 			}
 
 		}
 	}
 	lgn.close();
 }
-

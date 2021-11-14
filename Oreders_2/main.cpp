@@ -1,164 +1,150 @@
-
 #include "Order.h"
 
 using namespace std;
 
 Order orderAdd(vector<Order>& vect, string& Username);
 Order FindOrder(vector<Order>& order_list, string& Username);
-Order Edit_Order(Order& order, string& Username);
+Order Edit_Order(Order& order, string& Username, bool showOrd);
 Order delete_Order(Order& order);
+Order pshBckOrdr(vector<Order>& order_list);
 
 void saveOrder_list(vector<Order>& order_list);
 void orderPrintAll(vector<Order>& order_list, string& Username);
 void printOrder(Order& order);
-void saveOrders(vector<Order>& order_list, Order& order);
-void Edit_Users(vector<Users>& signIn, int& usr_chk);
+void saveToVector(vector<Order>& order_list, Order& order);
+void Edit_Users(vector<Users>& signIn);
 void Save_Users(vector<Users>& signIn);
 
-int UserCheck(string& Username, string& Password, vector<Users> Login);
+bool UserCheck(string& Username, string& Password, vector<Users>& Login);
 int sumOrders(vector<Order>& order_list, string& Username);
-int StartPage();
+bool StartPage(vector<Users>& signIn);
+int isInt();
+int clearanceLevel(string& Username, vector<Users>& Login);
 
-vector<Users> Login();
-vector<Order> load_order(vector<Order>& orders);
+vector<Users> Logins();
+vector<Order> load_order();
 
 string Username, Password;
 
-Users SignUp();
+Users Registration(vector<Users>& Login);
 
-bool sort_orders(Order first, Order second) {
-	return (first.id < second.id);
-}
-
-// cпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-// пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-// string replace
-// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+string base64_encode(std::string const& s, bool url);
 
 int main() {
+	
 	//setlocale(LC_ALL, "ru");
 	system("chcp 1251");
 	system("cls");
-	vector<Users> signIn = Login();
-
+	vector<Users> signIn = Logins();
 	int p = 3;
 	while (p > 0) {
-		int strt_pg = StartPage();
-		switch (strt_pg)
-		{
-		default:break;
-
-		case 1: {
-			exit(0);
-		}
-		case 2: {
-			signIn.push_back(SignUp());
-			system("cls");
-			break;
-		}
-		case 0: {
-			cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << p << endl;
-			cout << "Login:" << endl;
-			cin >> Username;
-			cout << "Password:" << endl;
-			cin >> Password;
-			int usr_chk = UserCheck(Username, Password, signIn);
-			if (usr_chk != 0) {
-				p = 3;
-				string a;
-				vector<Order> orders;
-				bool key = true;
-				while (key) {
+		if (StartPage(signIn)) {
+			p = 3;
+			vector<Order> orders;
+			bool key = true;
+			while (key) {
+				system("cls");
+				cout << "Заказы:\n" <<
+					"\t1) Добавить заказ.\n" <<
+					"\t2) Показать заказы.\n" <<
+					"\t3) Найти заказ.\n" <<
+					"\t4) Редактировать заказ\n" <<
+					"\t5) Удалить заказ.\n" <<
+					"\t6) Выгрузить заказы\n" <<
+					"\t7) Cумма стоимости заказов\n" <<
+					"\t8) Редактровать пользователей\n" <<
+					"\t9) Сохранить и выйти\n";
+				int a = isInt();
+				switch (a) {
+				case 1: {
+					try
+					{
+						Order ord = orderAdd(orders, Username);
+						orders.push_back(ord);
+					}
+					catch (const std::exception&)
+					{
+						cout << "Заказ заполнен неправильно!" << endl;
+						system("pause");
+					}
+					saveOrder_list(orders);
+					break;
+				}
+				case 2: {
+					orderPrintAll(orders, Username);
+					break;
+				}
+				case 3: {
+					try
+					{
+						Order order = FindOrder(orders, Username);
+						printOrder(order);
+					}
+					catch (const std::exception&)
+					{
+						cout << "Такого заказа нет." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 4: {
+					Order order = FindOrder(orders, Username);
+					try
+					{
+						order = Edit_Order(order, Username, true);
+						saveToVector(orders, order);
+					}
+					catch (const std::exception& ex)
+					{
+						cout << "\n" << ex.what() << endl;
+						system("pause");
+					}
+					saveOrder_list(orders);
+					break;
+				}
+				case 5: {
+					Order order = FindOrder(orders, Username);
+					order = delete_Order(order);
+					if (order.id != 0)saveToVector(orders, order);
+					saveOrder_list(orders);
+					break;
+				}
+				case 6: {
+					vector<Order> n = load_order();
+					n.push_back(pshBckOrdr(orders));
+					break;
+				}
+				case 7: {
 					system("cls");
-
-					cout << "пїЅпїЅпїЅпїЅпїЅпїЅ:\n" <<
-						"\t1) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.\n" <<
-						"\t2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.\n" <<
-						"\t3) пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.\n" <<
-						"\t4) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\n" <<
-						"\t5) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.\n" <<
-						"\t6) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ\n" <<
-						"\t7) CпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n" <<
-						"\t8) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n" <<
-						"\t9) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ\n";
-					cin >> a;
-					if (isdigit(a[0])) {
-						switch (stoi(a)) {
-						case 1: {
-							Order ord = orderAdd(orders, Username);
-							if (ord.id != 0)orders.push_back(ord);
-							saveOrder_list(orders);
-							break;
-						}
-						case 2: {
-							orderPrintAll(orders, Username);
-							break;
-						}
-						case 3: {
-							Order order = FindOrder(orders, Username);
-							printOrder(order);
-							break;
-						}
-
-						case 4: {
-							Order order = FindOrder(orders, Username);
-							order = Edit_Order(order, Username);
-							if (order.id != 0)saveOrders(orders, order);
-							saveOrder_list(orders);
-							break;
-						}
-
-						case 5: {
-							Order order = FindOrder(orders, Username);
-							order = delete_Order(order);
-							if (order.id != 0)saveOrders(orders, order);
-							saveOrder_list(orders);
-							break;
-						}
-
-						case 6: {
-							vector<Order> n = load_order(orders);
-							orders = n;
-							break;
-						}
-
-						case 7: {
-							system("cls");
-							cout << "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << sumOrders(orders, Username) << endl;
-							system("pause");
-							break;
-						}
-						case 8: {
-							if (usr_chk >= 2) {
-								Edit_Users(signIn, usr_chk);
-								Save_Users(signIn);
-							}
-							else {
-								cout << "пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" << endl;
-								system("pause");
-							}
-							break;
-						}
-
-						case 9: {
-							system("cls");
-							saveOrder_list(orders);
-							key = false;
-							break;
-						}
-						default: {
-							cout << "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ." << endl;
-							return 0;
-						}
-						}
-					};
+					cout << "Сумма стоимости заказов: " << sumOrders(orders, Username) << endl;
+					system("pause");
+					break;
+				}
+				case 8: {
+					int level = clearanceLevel(Username, signIn);
+					cout << level << endl;
+					if (level >= 2) {
+						Edit_Users(signIn);
+						Save_Users(signIn);
+					}
+					else { cout << "Вы здесь ничтожество" << endl; system("pause"); }
+					break;
+				}
+				case 9: {
+					system("cls");
+					saveOrder_list(orders);
+					key = false;
+					break;
+				}
+				default: {
+					cout << "Месье, вы дэбил, давайте по-новой." << endl;
+					return 0;
+				}
 				}
 			}
-			else {
-				p--;
-			}
 		}
+		else {
+			p--;
 		}
 	}
-
 }

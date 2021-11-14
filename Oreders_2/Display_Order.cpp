@@ -2,44 +2,33 @@
 
 using namespace std;
 
-void orderPrintAll(vector<Order>& order_list, string& Username) { //ГўГ»ГўГ®Г¤ ГўГ±ГҐГµ Г§Г ГЄГ Г§Г®Гў
+int isInt();
+
+void orderPrintAll(vector<Order>& order_list, string& Username) { //вывод всех заказов
 	system("cls");
 
 	for (Order order : order_list) {
 		if (order.delete_status == 0 && order.Username == Username) {
-			cout << "id: " << order.id << "\nГЂГўГІГ®Г°: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+			cout << "id: " << order.id << "\nДобавил(а): " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 		}
 	}
 	system("pause");
 }
 
-
-
-Order FindOrder(vector<Order>& order_list, string& Username) { //ГЇГ®ГЁГ±ГЄ Г§Г ГЄГ Г§Г 
+Order FindOrder(vector<Order>& order_list, string& Username) { //поиск заказа
 	system("cls");
-	string id;
 	cout << "Enter a order id:" << endl;
-	cin >> id;
-	if (isdigit(id[0])) {
-		if (stoi(id) <= order_list.size()) {
+	int id = isInt();
+		if (id <= order_list.size()) {
 			for (Order order : order_list) {
-				if (order.id == stoi(id)) {
-					if (order.delete_status == 0 && order.Username == Username) {
-						return order;
-						break;
-					}
+				if (order.id == id && order.delete_status == 0 && order.Username == Username) {
+					return order;
+					break;
 				}
 			}
 		}
-
+		else throw exception();
 	}
-
-	else cout << "Order not found" << endl;
-	system("pause");
-
-	Order ordrer;
-	return ordrer;
-}
 
 int sumOrders(vector<Order>& order_list, string& Username) {
 	int sum = 0;
@@ -51,11 +40,10 @@ int sumOrders(vector<Order>& order_list, string& Username) {
 	return sum;
 }
 
-void printOrder(Order& order) { //ГўГ»ГўГ®Г¤ Г®ГЇГ°ГҐГ¤ГҐГ«Г«ГҐГ­Г­Г®ГЈГ® Г§Г ГЄГ Г§Г 
+void printOrder(Order& order) { //вывод определленного заказа
 	system("cls");
 	if (order.delete_status == 0) {
-		cout << "id: " << order.id << "\nГЂГўГІГ®Г°: " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
+		cout << "id: " << order.id << "\nДобавил(а): " << order.Username << "\nDescription: " << order.description << "\nStatus: " << order.status << "\nPrice: " << order.price << endl;
 	}
-	else cout << "Order not found" << endl;
-	system("pause");
+	else throw exception();
 }
