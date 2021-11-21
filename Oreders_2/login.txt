@@ -1,0 +1,10 @@
+admin
+cGFzc3dvcmQ.
+3
+*
+user
+password
+1
+*
+
+*
