@@ -1,33 +1,24 @@
-
 #include "Order.h"
-#include <string.h>
 using namespace std;
 
-string Encode(string& Text);
-string Decode(string& Text);
 
 void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 	bool key = true;
 	while (key) {
 		int i = 1;
 		system("cls");
-		cout << "��� ������������: " << endl;
+		cout << "Âñå Ïîëüçîâàòåëè: " << endl;
 		for (Users x : signIn) {
-			cout << i << ")\n�����: " << 
-				x.login << "\n������: " <<
-				Encode(x.password )<< //.replace(0, x.password.size(),"********") << 
-				"\n������� ������� : " << x.status << "\n";
+			string psw = "";
+			for (int i = 0; i < x.password.size(); i++) {
+				psw += "*";
+			}
+			cout << i << ")\nËîãèí: " << x.login << "\nÏàðîëü: " << psw << "\nÓðîâåíü äîïóñêà: " << x.status << "\n";
 			i++;
 		}
 		int a;
-		cout << "\n\n������� ��������: \n" << endl;
-		cout << "\t1) �������� �����" << 
-			"\n\t2) �������� ������" << 
-			"\n\t3) �������� �������" << 
-			"\n\t4) ������� ������������" <<
-			"\n\t5) �������� ������������: " <<
-			"\n\t6) ���������� ������" << 
-			"\n\t7) ��������� � �����" << endl;
+		cout << "\n\nÂâåäèòå äåéñòâèå: \n" << endl;
+		cout << "\t1) Èçìåíèòü Ëîãèí" << "\n\t2) Èçìåíèòü ïàðîëü" << "\n\t3) Èçìåíèòü óðîâåíü" << "\n\t4) Óäàëèòü ïîëüçîâàòåëÿ" << "\n\t5) Äîáàâèòü ïîëüçîâàòåëÿ: " << "\n\t6) Ïîñìîòðåòü ïàðîëè" << "\n\t7) Ñîõðàíèòü è Âûéòè" << endl;
 		cin >> a;
 		switch (a)
 		{
@@ -35,24 +26,22 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 		{
 			if (usr_chk >= 3) {
 				system("cls");
-				string j;
-				cout << "������� ����� ������" << endl;
+				int j;
+				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
 				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						cout << "������� ����� �����: ";
-						cin >> signIn[z].login;
-					}
-					else {
-						cout << "������ ������������ ���!" << endl;
-						system("pause");
-					}
+				j--;
+				if (j <= (signIn.size())) {
+					cout << "Ââåäèòå íîâûé ëîãèí: ";
+					cin >> signIn[j].login;
+				}
+				else {
+					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
+					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
@@ -61,28 +50,22 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 		{
 			if (usr_chk >= 3) {
 				system("cls");
-				string j;
-				cout << "������� ����� ������" << endl;
+				int j;
+				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
 				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						cout << "������� ����� ������: ";
-						cin >> signIn[z].password;
-					}
-					else {
-						cout << "������ ������������ ���!" << endl;
-						system("pause");
-					}
+				j--;
+				if (j <= (signIn.size())) {
+					cout << "Ââåäèòå íîâûé ïàðîëü: ";
+					cin >> signIn[j].password;
 				}
 				else {
-					cout << "�����, �� �����, ������� ��-�����." << endl;
+					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
@@ -91,39 +74,33 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 		{
 			if (usr_chk >= 3) {
 				system("cls");
-				string j;
-				cout << "������� ����� ������" << endl;
+				int j;
+				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
 				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						while (true) {
-							int lvl = 0;
-							cout << "������� ����� �������(���������� ��������: 1): ";
-							cin >> lvl;
-							if (lvl > 0) {
-								signIn[z].status = lvl;
-								break;
-							}
-							else {
-								cout << "Wrong level!" << endl;
-								system("pause");
-							}
+				j--;
+				if (j <= (signIn.size())) {
+					while (true) {
+						int lvl = 0;
+						cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
+						cin >> lvl;
+						if (lvl > 0) {
+							signIn[j].status = lvl;
+							break;
 						}
-					}
-					else {
-						cout << "������ ������������ ���!" << endl;
-						system("pause");
+						else {
+							cout << "Wrong level!" << endl;
+							system("pause");
+						}
 					}
 				}
 				else {
-					cout << "�����, �� �����, ������� ��-�����." << endl;
+					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
@@ -132,27 +109,21 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 		{
 			if (usr_chk >= 3) {
 				system("cls");
-				string j;
-				cout << "������� ����� ������" << endl;
+				int j;
+				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
 				cin >> j;
-				if (isdigit(j[0])) {
-					int z = stoi(j) - 1;
-					if (z <= (signIn.size())) {
-						signIn.erase(signIn.begin() + z - 1);
-					}
-					else {
-						cout << "������ ������������ ���!" << endl;
-						system("pause");
-					}
+				j--;
+				if (j <= (signIn.size())) {
+					signIn.erase(signIn.begin() + j - 1);
 				}
 				else {
-					cout << "�����, �� �����, ������� ��-�����." << endl;
+					cout << "Òàêîãî ïîëüçîâàòåëÿ íåò!" << endl;
 					system("pause");
 				}
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
@@ -161,37 +132,30 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 2) {
 				system("cls");
 				Users user;
-				string stat = "1";
-				cout << "������� ����� �����: ";
+				int stat = 1;
+				cout << "Ââåäèòå íîâûé ëîãèí: ";
 				cin >> user.login;
-				cout << "������� ����� ������: ";
+				cout << "Ââåäèòå íîâûé ïàðîëü: ";
 				cin >> user.password;
 
 				while (true) {
-					cout << "������� ����� �������(���������� ��������: 1): ";
+					cout << "Ââåäèòå íîâûé óðîâåíü(Íàèìåíüøåå çíà÷åíèå: 1): ";
 					cin >> stat;
-					if (isdigit(stat[0])) {
-						if (stoi(stat) <= usr_chk) {
-							user.status = stoi(stat);
-							break;
-						}
-						else {
-							cout << "Wrong level!" << endl;
-							system("pause");
-						}
-					}
-					else {
-						cout << "�����, �� �����, ������� ��-�����." << endl;
-						system("pause");
+					if (stat <= usr_chk) {
+						user.status = stat;
 						break;
 					}
-
+					else {
+						cout << "Wrong level!" << endl;
+						system("pause");
+					}
 				}
+
 				signIn.push_back(user);
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
@@ -200,20 +164,20 @@ void Edit_Users(vector<Users>& signIn, int& usr_chk) {
 			if (usr_chk >= 3) {
 				system("cls");
 				int j;
-				cout << "������� ����� ������" << endl;
+				cout << "Ââåäèòå íîìåð Ëîãèíà" << endl;
 				cin >> j;
 				j--;
-				cout << "\n �����: " << signIn[j].login << "\n ������: " << signIn[j].password << endl;
+				cout << "\n Ëîãèí: " << signIn[j].login << "\n Ïàðîëü: " << signIn[j].password << endl;
 				system("pause");
 				break;
 			}
 			else {
-				cout << "� ��� ��� �������" << endl;
+				cout << "Ó âàñ íåò äîñòóïà" << endl;
 				system("pause");
 				break;
 			}
+
 		}
-		
 		default:
 			key = false;
 			break;
@@ -226,7 +190,7 @@ void Save_Users(vector<Users>& signIn) {
 	if (lgn.is_open()) {
 		for (Users x : signIn) {
 			if (x.status != 0) {
-				lgn << x.login << "\n" << Encode(x.password) << "\n" << x.status << "\n*\n";
+				lgn << x.login << "\n" << x.password << "\n" << x.status << "\n*\n";
 			}
 
 		}
@@ -234,3 +198,14 @@ void Save_Users(vector<Users>& signIn) {
 	lgn.close();
 }
 
+//Users Find_User(vector<Users>& signIn, int& num) {
+//	Users user;
+//	int i = 1;
+//	for (Users x : signIn) {
+//		if (num = i) {
+//			user = x;
+//			return user;
+//		}
+//		i++;
+//	}
+//}

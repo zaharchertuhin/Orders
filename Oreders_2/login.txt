@@ -1,12 +1,10 @@
 admin
-password
+cGFzc3dvcmQ.
 3
 *
 user
-1234
+password
 1
 *
-zakhar
-1234
-2
+
 *
