@@ -1,0 +1,12 @@
+﻿  base64.cpp
+  main.cpp
+  Orders.cpp
+  OrderService.cpp
+  Other.cpp
+  Repos.cpp
+  Start_Page.cpp
+  Users.cpp
+  UserService.cpp
+  Создание кода...
+C:\Users\zahar\OneDrive\Рабочий стол\Orders-homework21.11.21\Oreders_2\Repos.cpp(167): warning C4715: UserRepository::SaveUser: значение возвращается не при всех путях выполнения
+  Oreders_2.vcxproj -> C:\Users\zahar\OneDrive\Рабочий стол\Orders-homework21.11.21\x64\Debug\Oreders_2.exe

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Common">
+      <UniqueIdentifier>{0dcb1d54-b99d-4e27-9dd3-d2011bfe77dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\User">
+      <UniqueIdentifier>{43d0e425-1111-4878-9229-4c68d58a9f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Order">
+      <UniqueIdentifier>{4f980c35-ec9b-4ae4-b6bc-a5f2d47cc902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Repository">
+      <UniqueIdentifier>{2c54714b-267d-423c-b132-6048936d68dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Start_Page.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="base64.cpp">
+      <Filter>Исходные файлы\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Users.cpp">
+      <Filter>Исходные файлы\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Orders.cpp">
+      <Filter>Исходные файлы\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="Repos.cpp">
+      <Filter>Исходные файлы\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="Other.cpp">
+      <Filter>Исходные файлы\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderService.cpp">
+      <Filter>Исходные файлы\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="UserService.cpp">
+      <Filter>Исходные файлы\User</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="base64.h">
+      <Filter>Исходные файлы\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Order.h">
+      <Filter>Исходные файлы\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Исходные файлы\User</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
