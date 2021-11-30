@@ -15,7 +15,7 @@ private:
     int price;
     bool delete_status;
 
-public:
+public: //¬ хидере объ€вл€ют методы без тела
 
     void setUsername(std::string& usrnm) {
         Username = usrnm;

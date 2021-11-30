@@ -11,7 +11,7 @@ private:
     std::string password;
     int status = 1;
 
-public:
+public: //ну ты понял
     
     void setLogin(std::string& lgn) {
         login = lgn;

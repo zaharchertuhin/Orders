@@ -5,12 +5,12 @@ using namespace std;
 
 class OrderService {
 public:
+
 	Order FindOrder() {
 		system("cls");
 		cout << "Enter a order id:" << endl;
 		int id = isInt();
-		return ordRepo.get(id);
-
+		return ordRepo.get(id); // а если не найдем?
 	}
 
 	bool newOrder() {
@@ -97,7 +97,7 @@ public:
 		}
 	}
 
-private:
+private: //давай в начало это переносить?
 	OrderRepository ordRepo;
 	string UsrName = "admin";
 };

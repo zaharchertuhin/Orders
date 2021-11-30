@@ -44,23 +44,30 @@ public:
 			}
 			else { cout << "\n\nПароли не совпадают. Повторите еще раз:" << endl; system("pause"); }
 		}
+
 		if (user.getLogin() == "admin") {
 			user.setStatus(3);
-		}
-		else user.setStatus(1);
+		} else user.setStatus(1);
+
 		if (lgn.is_open()) {
 			lgn << user.getLogin() << "\n" << user.getPassword() << "\n" << user.getStatus() << "\n*\n";
 		}
+
 		lgn.close();
 		usrRepo.SaveNewUser(user);
 		return true;
 	}
 
 	bool Authorization() {
-		cout << "Login:" << endl;
+		/**
+		* Давай ввод данных пользователя вообще вынесем в меню, например, 
+		* или где лучше смотрится, а в autorization(string login, string password)
+		*/
+		cout << "Login:" << endl; //убери перенос на след строку
 		cin >> Username;
-		cout << "Password:" << endl;
+		cout << "Password:" << endl; // аналогично
 		cin >> Password;
+
 		Password = base64_encode(Password, true);
 		for (int i = 0; i < usrRepo.getAll().size(); i++) {
 			if (usrRepo.get(Username).getLogin() == Username && usrRepo.get(Username).getPassword() == Password) {
@@ -71,10 +78,14 @@ public:
 	}
 
 	User FindUser() {
+		/**
+		* тут то же самое, в сервисе хранится именно логика, а взаимодействие с юзером отдельно
+		*/
 		system("cls");
 		string j;
 		cout << "Введите Логин пользователя, которого желаете изменить." << endl;
 		cin >> j;
+
 		User usr = usrRepo.get(j);
 		if (usr.getLogin() != "") {
 			return usr;
@@ -87,7 +98,7 @@ public:
 		system("cls");
 		string lg = usr.getLogin();
 		string login;
-		cout << "Введите новый логин: ";
+		cout << "Введите новый логин: "; //короче ты понял
 		cin >> login;
 		usr.setLogin(login);
 		usrRepo.SaveUser(usr, lg);
@@ -135,6 +146,10 @@ public:
 	}
 
 	bool Del_User(User& usr) {
+		/**
+		* Либо я слепой, либо это черная магия
+		* Я так и не понял зачем этот lg
+		*/
 		string lg = usr.getLogin();
 		usrRepo.DeleteUser(usr);
 		return true;
@@ -166,8 +181,14 @@ public:
 		}
 	}
 
-private:
-	string Username;
+	/**
+	* Вынеси private в начало лучше
+	* У тебя названия методов то с большой, то с маленькой буквы, определись уже
+	* если интересы конвенции именно плюса, то вот: https://google.github.io/styleguide/cppguide.html#Naming
+	*/
+
+private: 
+	string Username; // еретеки молвят, дескать, названия переменных с маленькой буквы пишут
 	string  Password;
-	UserRepository usrRepo;
+	UserRepository usrRepo; // а тут ты решил передумать: user_repo;
 };

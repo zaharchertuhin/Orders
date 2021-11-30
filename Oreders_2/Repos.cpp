@@ -6,6 +6,11 @@ using namespace std;
 string base64_encode(string const& s, bool url);
 int isInt();
 
+/**
+* Создай:
+* OrderRepository.cpp
+* UserRepository.cpp
+*/
 class OrderRepository
 {
 public:
