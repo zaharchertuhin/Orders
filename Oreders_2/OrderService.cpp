@@ -1,23 +1,27 @@
 #include "Order.h"
-#include "Repos.cpp"
+#include "OrderRepository.cpp"
 
 using namespace std;
 
 class OrderService {
+private: 
+	OrderRepository order_repo;
+	string UsrName = "admin";
+
 public:
 
 	Order FindOrder() {
 		system("cls");
 		cout << "Enter a order id:" << endl;
 		int id = isInt();
-		return ordRepo.get(id); // а если не найдем?
+		return order_repo.get(id);
 	}
 
-	bool newOrder() {
+	bool NewOrder() {
 		Order order;
 		string line;
 		system("cls");
-		int v = static_cast<int>(ordRepo.getAll().size()) + 1;
+		int v = static_cast<int>(order_repo.getAll().size()) + 1;
 		order.setId(v);
 		order.setDelStatus(false);
 		order.setUsername(UsrName);
@@ -31,7 +35,7 @@ public:
 		int val = isInt();
 		if (val >= 0) {
 			order.setPrice(val);
-			ordRepo.saveOrder(order);
+			order_repo.saveOrder(order);
 			return 0;
 		}
 		else {
@@ -39,9 +43,9 @@ public:
 		}
 	}
 
-	int sumOrders() {
+	int SumOrders() {
 		int sum = 0;
-		for (Order order : ordRepo.getAll()) {
+		for (Order order : order_repo.getAll()) {
 			if (order.getUsername() == UsrName) {
 				sum += order.getPrice();
 			}
@@ -49,7 +53,7 @@ public:
 		return sum;
 	}
 
-	void printOrder(Order& ord) { 
+	void PrintOrder(Order& ord) { 
 		system("cls");
 		if (ord.getDelStatus() == 0) {
 			cout << "id: " << ord.getId()
@@ -62,9 +66,9 @@ public:
 		else throw exception();
 	}
 
-	void printAll() {
+	void PrintAll() {
 		system("cls");
-		for (Order order : ordRepo.getAll()) {
+		for (Order order : order_repo.getAll()) {
 			if (order.getDelStatus() == 0 && order.getUsername() == UsrName) {
 				cout << "id: " << order.getId() << "\nДобавил(а): " << order.getUsername()
 					<< "\nDescription: " << order.getDescription()
@@ -89,7 +93,7 @@ public:
 		int val = isInt();
 		if (val >= 0) {
 			ord.setPrice(val);
-			ordRepo.saveOrder(ord);
+			order_repo.saveOrder(ord);
 			return 0;
 		}
 		else {
@@ -97,7 +101,19 @@ public:
 		}
 	}
 
-private: //давай в начало это переносить?
-	OrderRepository ordRepo;
-	string UsrName = "admin";
+	bool DeleteById(Order& ord) {
+		int i = ord.getId();
+		order_repo.deleteById(i);
+		return 0;
+	}
+
+	bool Filling() {
+		order_repo.filling();
+		return 0;
+	}
+
+	bool Save() {
+		order_repo.saveOrderList();
+		return 0;
+	}
 };

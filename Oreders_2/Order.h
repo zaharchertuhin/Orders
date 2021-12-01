@@ -5,55 +5,30 @@
 #include <string>
 #include <fstream>
 
-
 class Order {
 private:
     std::string Username;
-    int id ;
+    int id = 0;
     std::string description;
     std::string status;
-    int price;
-    bool delete_status;
+    int price = 0;
+    bool delete_status = true;
 
-public: //¬ хидере объ€вл€ют методы без тела
-
-    void setUsername(std::string& usrnm) {
-        Username = usrnm;
-    }
-    void setId(int& i) {
-        id = i;
-    }
-    void setDescription(std::string& dscrpt) {
-        description = dscrpt;
-    }
-    void setStatus(std::string& stts) {
-        status = stts;
-    }
-    void setPrice(int& pric) {
-        price = pric;
-    }
-    void setDelStatus(bool dlst) {
-        delete_status = dlst;
-    }
-    std::string getUsername() {
-        return Username;
-    }
-    int getId() {
-        return id;
-    }
-    std::string getDescription() {
-        return description;
-    }
-    std::string getStatus() {
-        return status;
-    }
-   int getPrice() {
-       return price;
-    }
-    bool getDelStatus() {
-        return delete_status;
-    }
+public:
+    void setUsername(std::string& usrnm);
+    void setId(int& i);
+    void setDescription(std::string& dscrpt);
+    void setStatus(std::string& stts);
+    void setPrice(int& pric);
+    void setDelStatus(bool dlst);
+    std::string getUsername();
+    int getId();
+    std::string getDescription();
+    std::string getStatus();
+    int getPrice();
+    bool getDelStatus();
 };
+
 
 
 

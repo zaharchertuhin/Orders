@@ -30,19 +30,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Start_Page.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="base64.cpp">
       <Filter>Исходные файлы\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Users.cpp">
+    <ClCompile Include="User.cpp">
       <Filter>Исходные файлы\User</Filter>
     </ClCompile>
-    <ClCompile Include="Orders.cpp">
+    <ClCompile Include="Order.cpp">
       <Filter>Исходные файлы\Order</Filter>
     </ClCompile>
-    <ClCompile Include="Repos.cpp">
+    <ClCompile Include="UserRepository.cpp">
       <Filter>Исходные файлы\Repository</Filter>
     </ClCompile>
     <ClCompile Include="Other.cpp">
@@ -53,6 +50,15 @@
     </ClCompile>
     <ClCompile Include="UserService.cpp">
       <Filter>Исходные файлы\User</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderRepository.cpp">
+      <Filter>Исходные файлы\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Исходные файлы\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Start_Page.cpp">
+      <Filter>Исходные файлы\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,13 @@
 #include "User.h"
-#include "Repos.cpp"
+#include "UserRepository.cpp"
 
 string base64_encode(string const& s, bool url);
 
 class UserService {
+private:
+	User last_user;
+	UserRepository user_repo; // а тут ты решил передумать: user_repo;
+
 public:
 
 	bool Registration() {
@@ -17,9 +21,9 @@ public:
 			cout << "Введите логин: ";
 			(cin >> line).get();
 			user.setLogin(line);
-			/*if (usrRepo.getAll().size() == 0)key = false;
+			if (user_repo.getAll().size() == 0)key = false;
 			else {
-				for (User U : usrRepo.getAll()) {
+				for (User U : user_repo.getAll()) {
 					if (U.getLogin() == user.getLogin()) {
 						cout << "\nТакой пользователь уже существует." << endl;
 						key = true;
@@ -29,7 +33,7 @@ public:
 						break;
 					}
 				}
-			}*/
+			}
 			string psw1, psw2;
 			cout << "\nВведите новый пароль: ";
 			cin >> psw1;
@@ -54,39 +58,24 @@ public:
 		}
 
 		lgn.close();
-		usrRepo.SaveNewUser(user);
+		user_repo.saveNewUser(user);
+		user_repo.saveUsers();
 		return true;
 	}
 
-	bool Authorization() {
-		/**
-		* Давай ввод данных пользователя вообще вынесем в меню, например, 
-		* или где лучше смотрится, а в autorization(string login, string password)
-		*/
-		cout << "Login:" << endl; //убери перенос на след строку
-		cin >> Username;
-		cout << "Password:" << endl; // аналогично
-		cin >> Password;
-
-		Password = base64_encode(Password, true);
-		for (int i = 0; i < usrRepo.getAll().size(); i++) {
-			if (usrRepo.get(Username).getLogin() == Username && usrRepo.get(Username).getPassword() == Password) {
+	bool Authorization(string& username, string& password) {
+		password = base64_encode(password, true);
+		for (int i = 0; i < user_repo.getAll().size(); i++) {
+			if (user_repo.get(username).getLogin() == username && user_repo.get(username).getPassword() == password) {
+				last_user = user_repo.get(username);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	User FindUser() {
-		/**
-		* тут то же самое, в сервисе хранится именно логика, а взаимодействие с юзером отдельно
-		*/
-		system("cls");
-		string j;
-		cout << "Введите Логин пользователя, которого желаете изменить." << endl;
-		cin >> j;
-
-		User usr = usrRepo.get(j);
+	User FindUser(string& j) {
+		User usr = user_repo.get(j);
 		if (usr.getLogin() != "") {
 			return usr;
 		}
@@ -94,31 +83,25 @@ public:
 
 	}
 
-	bool EditLogin(User& usr) {
+	bool EditLogin(User& usr, string& login) {
 		system("cls");
 		string lg = usr.getLogin();
-		string login;
-		cout << "Введите новый логин: "; //короче ты понял
-		cin >> login;
 		usr.setLogin(login);
-		usrRepo.SaveUser(usr, lg);
+		user_repo.saveUser(usr, lg);
+		user_repo.saveUsers();
 		return 0;
 	}
 
-	bool EditPswrd(User& usr) {
+	bool EditPswrd(User& usr, string& psw1, string& psw2) {
 		string lg = usr.getLogin();
 		while (true)
 		{
 			system("cls");
-			string psw1, psw2;
-			cout << "Введите новый пароль: ";
-			cin >> psw1;
-			cout << "\n\nПовторите новый пароль: ";
-			cin >> psw2;
 			if (psw1 == psw2) {
 				psw1 = base64_encode(psw1, true);
 				usr.setPassword(psw1);
-				usrRepo.SaveUser(usr, lg);
+				user_repo.saveUser(usr, lg);
+				user_repo.saveUsers();
 				return 0;
 				break;
 			}
@@ -126,15 +109,14 @@ public:
 		}
 	}
 
-	bool EditLvl(User& usr) {
+	bool EditLvl(User& usr, int lvl) {
 		system("cls");
 		string lg = usr.getLogin();
 		while (true) {
-			cout << "Введите новый уровень от 1 до 3: ";
-			int lvl = isInt();
 			if (lvl > 0 && lvl < 4) {
 				usr.setStatus(lvl);
-				usrRepo.SaveUser(usr, lg);
+				user_repo.saveUser(usr, lg);
+				user_repo.saveUsers();
 				return 0;
 				break;
 			}
@@ -146,33 +128,29 @@ public:
 	}
 
 	bool Del_User(User& usr) {
-		/**
-		* Либо я слепой, либо это черная магия
-		* Я так и не понял зачем этот lg
-		*/
-		string lg = usr.getLogin();
-		usrRepo.DeleteUser(usr);
+		user_repo.deleteUser(usr);
+		user_repo.saveUsers();
 		return true;
 	}
 
-	bool clearanceLevel(string& Usrname) {
-		for (int i = 0; i < usrRepo.getAll().size(); i++) {
-			if (usrRepo.get(Usrname).getLogin() == Usrname) {
+	bool ClearanceLevel(string& Usrname) {
+		for (int i = 0; i < user_repo.getAll().size(); i++) {
+			if (user_repo.get(Usrname).getLogin() == Usrname) {
 				return true;
 			}
 		}
 		return 1;
 	}
 
-	void Fillind() {
-		usrRepo.filling();
+	void Filling() {
+		user_repo.filling();
 	}
 
-	void printUsers() {
+	void PrintUsers() {
 		int i = 1;
 		system("cls");
 		cout << "Все Пользователи: " << endl;
-		for (User x : usrRepo.getAll()) {
+		for (User x : user_repo.getAll()) {
 			cout << i << ") Логин: " << x.getLogin() << "\nПароль: ";
 			for (int i = 0; i < x.getPassword().size(); i++) { cout << "*"; }
 			/*cout << x.password.replace(x.password.begin(), x.password.end(), " * ");*/
@@ -181,14 +159,17 @@ public:
 		}
 	}
 
+	int GetLevel() {
+		return last_user.getStatus();
+	}
+
+	bool SaveUsers() {
+		user_repo.saveUsers();
+	}
+
 	/**
 	* Вынеси private в начало лучше
 	* У тебя названия методов то с большой, то с маленькой буквы, определись уже
 	* если интересы конвенции именно плюса, то вот: https://google.github.io/styleguide/cppguide.html#Naming
 	*/
-
-private: 
-	string Username; // еретеки молвят, дескать, названия переменных с маленькой буквы пишут
-	string  Password;
-	UserRepository usrRepo; // а тут ты решил передумать: user_repo;
 };

@@ -11,25 +11,13 @@ private:
     std::string password;
     int status = 1;
 
-public: //ну ты понял
+public:
     
-    void setLogin(std::string& lgn) {
-        login = lgn;
-    }
-    void setPassword(std::string& psw) {
-        password = psw;
-    }
-    void setStatus(const int& i) {
-        status = i;
-    }
-    std::string getLogin() {
-        return login;
-    }
-    std::string getPassword() {
-        return password;
-    }
-    int getStatus() {
-        return status;
-    }
+    void setLogin(std::string& lgn);
+    void setPassword(std::string& psw);
+    void setStatus(const int& i);
+    std::string getLogin();
+    std::string getPassword();
+    int getStatus();
 };
 
