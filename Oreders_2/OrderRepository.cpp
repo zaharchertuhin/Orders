@@ -25,7 +25,7 @@ public:
 
 	bool filling() {
 		fstream in;
-		in.open("C:\\Users\\Захар\\Desktop\\Orders-services\\Orders-services\\Oreders_2\\data.dat");
+		in.open("data.dat");
 		if (in.is_open())
 		{
 			while (!in.eof()) {
@@ -61,7 +61,7 @@ public:
 
 	bool saveOrderList() { //сохранение всех заказов в файл
 		fstream in;
-		in.open("C:\\Users\\Захар\\Desktop\\Orders-services\\Orders-services\\Oreders_2\\data.dat");
+		in.open("data.dat");
 		if (in.is_open()) {
 			for (Order order : orders) {
 				in << order.getId() << "\n" << order.getUsername() << "\n" << order.getDescription()

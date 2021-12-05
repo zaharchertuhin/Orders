@@ -12,7 +12,7 @@ private:
 
 public:
 	bool filling() {
-		ifstream lgn("C:\\Users\\Захар\\Desktop\\Orders-services\\Orders-services\\Oreders_2\\login.txt");
+		ifstream lgn("login.txt");
 		string data;
 		if (lgn.is_open()) {
 			while (!lgn.eof())
@@ -59,6 +59,7 @@ public:
 				return 0;
 			}
 		}
+		return false;
 	}
 
 	bool deleteUser(User& usr) {
@@ -72,7 +73,7 @@ public:
 	}
 
 	bool saveUsers() {
-		fstream lgn("C:\\Users\\Захар\\Desktop\\Orders-services\\Orders-services\\Oreders_2\\login.txt");
+		fstream lgn("login.txt");
 		if (lgn.is_open()) {
 			for (User x : Registered) {
 				if (x.getStatus() != 0) {

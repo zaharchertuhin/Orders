@@ -28,7 +28,15 @@ void Menu() {
 		case 1: {
 			try
 			{
-				orderService.NewOrder();
+				system("cls");
+				string Des, Stat;
+				cout << "¬ведите новое описание заказа: ";
+				(cin >> Des).get();
+				cout << "¬ведите новый статус заказа: ";
+				(cin >> Stat).get();
+				cout << "¬ведите новую стоимость заказа: ";
+				int val = isInt();
+				orderService.NewOrder(Des, Stat, val);
 			}
 			catch (const std::exception& exp)
 			{
@@ -39,13 +47,17 @@ void Menu() {
 			break;
 		}
 		case 2: {
+			system("cls");
 			orderService.PrintAll();
 			break;
 		}
 		case 3: {
 			try
 			{
-				Order ord = orderService.FindOrder();
+				system("cls");
+				cout << "Enter a order id:" << endl;
+				int id = isInt();
+				Order ord = orderService.FindOrder(id);
 				orderService.PrintOrder(ord);
 			}
 			catch (const std::exception& exp)
@@ -59,8 +71,18 @@ void Menu() {
 		case 4: {
 			try
 			{
-				Order ord = orderService.FindOrder();
-				orderService.EditOrder(ord);
+				system("cls");
+				cout << "Enter a order id:" << endl;
+				int id = isInt();
+				Order ord = orderService.FindOrder(id);
+				string Des, Stat;
+				cout << "¬ведите новое описание заказа: ";
+				(cin >> Des).get();
+				cout << "¬ведите новый статус заказа: ";
+				(cin >> Stat).get();
+				cout << "¬ведите новую стоимость заказа: ";
+				int val = isInt();
+				orderService.EditOrder(ord, Des, Stat, val);
 			}
 			catch (const std::exception& exp)
 			{
@@ -71,7 +93,10 @@ void Menu() {
 		}
 		case 5: {
 			try {
-				Order ord = orderService.FindOrder();
+				system("cls");
+				cout << "Enter a order id:" << endl;
+				int id = isInt();
+				Order ord = orderService.FindOrder(id);
 				orderService.DeleteById(ord);
 			}
 			catch (const std::exception& exp)
@@ -103,7 +128,6 @@ void Menu() {
 		case 8: {
 			// допилить проверку пользовател€
 			int level = getLevel();
-			cout << level << endl;
 			if (level >= 2) {
 				Edit_Users();
 			}

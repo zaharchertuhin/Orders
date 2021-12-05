@@ -10,31 +10,28 @@ private:
 
 public:
 
-	Order FindOrder() {
-		system("cls");
-		cout << "Enter a order id:" << endl;
-		int id = isInt();
+	void CoutOrd(Order& ord) {
+		cout << "id: " << ord.getId()
+			<< "\nДобавил(а): " << ord.getUsername()
+			<< "\nDescription: " << ord.getDescription()
+			<< "\nStatus: " << ord.getStatus()
+			<< "\nPrice: " << ord.getPrice() << endl;
+	}
+
+	Order FindOrder(int id) {
 		return order_repo.get(id);
 	}
 
-	bool NewOrder() {
+	bool NewOrder(string Des, string Stat, int pric) {
 		Order order;
-		string line;
-		system("cls");
 		int v = static_cast<int>(order_repo.getAll().size()) + 1;
 		order.setId(v);
 		order.setDelStatus(false);
 		order.setUsername(UsrName);
-		cout << "Введите новое описание заказа: ";
-		(cin >> line).get();
-		order.setDescription(line);
-		cout << "Введите новый статус заказа: ";
-		(cin >> line).get();
-		order.setStatus(line);
-		cout << "Введите новую стоимость заказа: ";
-		int val = isInt();
-		if (val >= 0) {
-			order.setPrice(val);
+		order.setDescription(Des);
+		order.setStatus(Stat);
+		if (pric >= 0) {
+			order.setPrice(pric);
 			order_repo.saveOrder(order);
 			return 0;
 		}
@@ -54,13 +51,8 @@ public:
 	}
 
 	void PrintOrder(Order& ord) { 
-		system("cls");
 		if (ord.getDelStatus() == 0) {
-			cout << "id: " << ord.getId()
-				<< "\nДобавил(а): " << ord.getUsername()
-				<< "\nDescription: " << ord.getDescription()
-				<< "\nStatus: " << ord.getStatus()
-				<< "\nPrice: " << ord.getPrice() << endl;
+			CoutOrd(ord);
 			system("pause");
 		}
 		else throw exception();
@@ -70,29 +62,17 @@ public:
 		system("cls");
 		for (Order order : order_repo.getAll()) {
 			if (order.getDelStatus() == 0 && order.getUsername() == UsrName) {
-				cout << "id: " << order.getId() << "\nДобавил(а): " << order.getUsername()
-					<< "\nDescription: " << order.getDescription()
-					<< "\nStatus: " << order.getStatus()
-					<< "\nPrice: " << order.getPrice() << endl;
+				CoutOrd(order);
 			}
 		}
 		system("pause");
 	}
 
-	bool EditOrder(Order& ord) {
-		system("cls");
-		string line = "";
-		ord.setUsername(UsrName);
-		cout << "Введите новое описание заказа: ";
-		(cin >> line).get();
-		ord.setDescription(line);
-		cout << "Введите новый статус заказа: ";
-		(cin >> line).get();
-		ord.setStatus(line);
-		cout << "Введите новую стоимость заказа: ";
-		int val = isInt();
-		if (val >= 0) {
-			ord.setPrice(val);
+	bool EditOrder(Order& ord ,string Des, string Stat, int pric) {	
+		ord.setDescription(Des);
+		ord.setStatus(Stat);
+		if (pric >= 0) {
+			ord.setPrice(pric);
 			order_repo.saveOrder(ord);
 			return 0;
 		}

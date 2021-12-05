@@ -133,14 +133,6 @@ public:
 		return true;
 	}
 
-	bool ClearanceLevel(string& Usrname) {
-		for (int i = 0; i < user_repo.getAll().size(); i++) {
-			if (user_repo.get(Usrname).getLogin() == Usrname) {
-				return true;
-			}
-		}
-		return 1;
-	}
 
 	void Filling() {
 		user_repo.filling();
@@ -165,6 +157,7 @@ public:
 
 	bool SaveUsers() {
 		user_repo.saveUsers();
+		return true;
 	}
 
 	/**
