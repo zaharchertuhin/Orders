@@ -141,11 +141,12 @@
   <ItemGroup>
     <ClCompile Include="base64.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="OrderMenu.cpp" />
     <ClCompile Include="OrderRepository.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="OrderService.cpp" />
     <ClCompile Include="Other.cpp" />
+    <ClCompile Include="UserMenu.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <ClCompile Include="Start_Page.cpp" />
     <ClCompile Include="User.cpp" />

@@ -6,26 +6,23 @@ string base64_encode(string const& s, bool url);
 class UserService {
 private:
 	User last_user;
-	UserRepository user_repo; // а тут ты решил передумать: user_repo;
+	UserRepository user_repo; 
 
 public:
 
-	bool Registration() {
+	bool Registration(string& log, string& psw1, string& psw2) {
 		system("cls");
 		User user;
-		string line;
 		bool key = true;
 		fstream lgn("login.txt", ios::app);
 		while (key)
 		{
-			cout << "Введите логин: ";
-			(cin >> line).get();
-			user.setLogin(line);
+			user.setLogin(log);
 			if (user_repo.getAll().size() == 0)key = false;
 			else {
 				for (User U : user_repo.getAll()) {
 					if (U.getLogin() == user.getLogin()) {
-						cout << "\nТакой пользователь уже существует." << endl;
+						throw exception("Такой пользователь уже существует.");
 						key = true;
 
 					}
@@ -34,19 +31,13 @@ public:
 					}
 				}
 			}
-			string psw1, psw2;
-			cout << "\nВведите новый пароль: ";
-			cin >> psw1;
-			cout << "\nПовторите новый пароль: ";
-			cin >> psw2;
 			if (psw1 == psw2) {
-
 				psw1 = base64_encode(psw1, true);
 				user.setPassword(psw1);
 				key = false;
 
 			}
-			else { cout << "\n\nПароли не совпадают. Повторите еще раз:" << endl; system("pause"); }
+			else throw exception("Пароли не совпадают. Повторите еще раз:");
 		}
 
 		if (user.getLogin() == "admin") {
@@ -105,7 +96,7 @@ public:
 				return 0;
 				break;
 			}
-			else {throw exception("Пароли не совпадают.Повторите еще раз : "); system("pause"); }
+			else throw exception("Пароли не совпадают.Повторите еще раз : "); 
 		}
 	}
 
@@ -161,8 +152,6 @@ public:
 	}
 
 	/**
-	* Вынеси private в начало лучше
-	* У тебя названия методов то с большой, то с маленькой буквы, определись уже
 	* если интересы конвенции именно плюса, то вот: https://google.github.io/styleguide/cppguide.html#Naming
 	*/
 };

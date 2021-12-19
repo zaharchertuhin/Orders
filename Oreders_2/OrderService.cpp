@@ -10,14 +10,6 @@ private:
 
 public:
 
-	void CoutOrd(Order& ord) {
-		cout << "id: " << ord.getId()
-			<< "\nДобавил(а): " << ord.getUsername()
-			<< "\nDescription: " << ord.getDescription()
-			<< "\nStatus: " << ord.getStatus()
-			<< "\nPrice: " << ord.getPrice() << endl;
-	}
-
 	Order FindOrder(int id) {
 		return order_repo.get(id);
 	}
@@ -50,22 +42,8 @@ public:
 		return sum;
 	}
 
-	void PrintOrder(Order& ord) { 
-		if (ord.getDelStatus() == 0) {
-			CoutOrd(ord);
-			system("pause");
-		}
-		else throw exception();
-	}
-
-	void PrintAll() {
-		system("cls");
-		for (Order order : order_repo.getAll()) {
-			if (order.getDelStatus() == 0 && order.getUsername() == UsrName) {
-				CoutOrd(order);
-			}
-		}
-		system("pause");
+	vector<Order> PrintAll() {
+		return order_repo.getAll();
 	}
 
 	bool EditOrder(Order& ord ,string Des, string Stat, int pric) {	

@@ -2,9 +2,12 @@
 using namespace std;
 
 bool StartPage();
-void Menu();
+void Order_Menu();
+
+void fill();
 
 int main() {
+	fill();
 	//setlocale(LC_ALL, "ru");
 	system("chcp 1251");
 	system("cls");
@@ -12,7 +15,7 @@ int main() {
 	while (p > 0) {
 		if (StartPage()) {
 			p = 3;
-			Menu();
+			Order_Menu();
 		}
 		else {
 			p--;
