@@ -15,4 +15,3 @@ int isInt() {
 	}
 	return -1;
 }
-

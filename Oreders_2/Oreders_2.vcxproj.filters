@@ -28,6 +28,9 @@
     <Filter Include="Исходные файлы\View">
       <UniqueIdentifier>{4665dcd4-987b-4aae-8968-43fa40413887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Utils">
+      <UniqueIdentifier>{4ed8ea07-ffbc-4eb9-be1b-f476ff1a6ac4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="UserRepository.cpp">
       <Filter>Исходные файлы\Repository</Filter>
-    </ClCompile>
-    <ClCompile Include="Other.cpp">
-      <Filter>Исходные файлы\Common</Filter>
     </ClCompile>
     <ClCompile Include="OrderService.cpp">
       <Filter>Исходные файлы\Order</Filter>
@@ -65,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="Start_Page.cpp">
       <Filter>Исходные файлы\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Other.cpp">
+      <Filter>Исходные файлы\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ using namespace std;
 class OrderService {
 private: 
 	OrderRepository order_repo;
-	string UsrName = "admin";
+	string user_name = "admin";
 
 public:
 
@@ -14,16 +14,16 @@ public:
 		return order_repo.get(id);
 	}
 
-	bool NewOrder(string Des, string Stat, int pric) {
+	bool NewOrder(string description, string starus, int price) {
 		Order order;
-		int v = static_cast<int>(order_repo.getAll().size()) + 1;
-		order.setId(v);
+		int id = static_cast<int>(order_repo.getAll().size()) + 1;
+		order.setId(id);
 		order.setDelStatus(false);
-		order.setUsername(UsrName);
-		order.setDescription(Des);
-		order.setStatus(Stat);
-		if (pric >= 0) {
-			order.setPrice(pric);
+		order.setUsername(user_name);
+		order.setDescription(description);
+		order.setStatus(starus);
+		if (price >= 0) {
+			order.setPrice(price);
 			order_repo.saveOrder(order);
 			return 0;
 		}
@@ -35,7 +35,7 @@ public:
 	int SumOrders() {
 		int sum = 0;
 		for (Order order : order_repo.getAll()) {
-			if (order.getUsername() == UsrName) {
+			if (order.getUsername() == user_name) {
 				sum += order.getPrice();
 			}
 		}
@@ -46,7 +46,8 @@ public:
 		return order_repo.getAll();
 	}
 
-	bool EditOrder(Order& ord ,string Des, string Stat, int pric) {	
+	//TODO : Пересылать класс?
+	bool EditOrder(Order& ord, string Des, string Stat, int pric) {	
 		ord.setDescription(Des);
 		ord.setStatus(Stat);
 		if (pric >= 0) {

@@ -16,7 +16,7 @@ void PrintOrd(Order& ord) {
 		<< "\nPrice: " << ord.getPrice() << endl;
 	system("pause");
 	}
-	else throw exception();
+	else throw exception(); //WTF?
 }
 
 OrderService orderService;
