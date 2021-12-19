@@ -2,11 +2,3 @@ admin
 cGFzc3dvcmQ.
 3
 *
-user1
-cGFzc3dvcmQ.
-1
-*
-user2
-cGFzc3dvcmQ.
-2
-*

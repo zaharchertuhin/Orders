@@ -14,7 +14,6 @@ void PrintOrd(Order& ord) {
 		<< "\nDescription: " << ord.getDescription()
 		<< "\nStatus: " << ord.getStatus()
 		<< "\nPrice: " << ord.getPrice() << endl;
-	system("pause");
 	}
 	else throw exception();
 }
@@ -61,7 +60,9 @@ void Order_Menu() {
 		case 2: {
 			system("cls");
 			for (Order ord : orderService.PrintAll()) {
-				PrintOrd(ord);
+				if (ord.getDelStatus() == 0) {
+					PrintOrd(ord);
+				}
 			}
 			system("pause");
 			break;

@@ -14,16 +14,16 @@ public:
 		return order_repo.get(id);
 	}
 
-	bool NewOrder(string Des, string Stat, int pric) {
+	bool NewOrder(string description, string status, int price) {
 		Order order;
 		int v = static_cast<int>(order_repo.getAll().size()) + 1;
 		order.setId(v);
 		order.setDelStatus(false);
 		order.setUsername(UsrName);
-		order.setDescription(Des);
-		order.setStatus(Stat);
-		if (pric >= 0) {
-			order.setPrice(pric);
+		order.setDescription(description);
+		order.setStatus(status);
+		if (price >= 0) {
+			order.setPrice(price);
 			order_repo.saveOrder(order);
 			return 0;
 		}
@@ -46,11 +46,14 @@ public:
 		return order_repo.getAll();
 	}
 
-	bool EditOrder(Order& ord ,string Des, string Stat, int pric) {	
-		ord.setDescription(Des);
-		ord.setStatus(Stat);
-		if (pric >= 0) {
-			ord.setPrice(pric);
+	/* подумать над вводом данных, тип если по€витс€ новые пол€, то их и тут надо будет добавл€итд
+	*/
+
+	bool EditOrder(Order& ord ,string description, string status, int price) {	
+		ord.setDescription(description);
+		ord.setStatus(status);
+		if (price >= 0) {
+			ord.setPrice(price);
 			order_repo.saveOrder(ord);
 			return 0;
 		}
